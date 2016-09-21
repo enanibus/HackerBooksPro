@@ -9,7 +9,7 @@
         <relationship name="localization" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Localization" inverseName="annotations" inverseEntity="Localization" syncable="YES"/>
         <relationship name="photo" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Photo" inverseName="annotation" inverseEntity="Photo" syncable="YES"/>
     </entity>
-    <entity name="Author" representedClassName="HackerBooksProTests.Author" syncable="YES">
+    <entity name="Author" representedClassName=".Author" syncable="YES">
         <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
         <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Book" inverseName="authors" inverseEntity="Book" syncable="YES"/>
     </entity>

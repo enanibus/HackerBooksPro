@@ -1,0 +1,212 @@
+[
+    {
+        "authors": "Scott Chacon, Ben Straub",
+        "image_url": "http://hackershelf.com/media/cache/b4/24/b42409de128aa7f1c9abbbfa549914de.jpg",
+        "pdf_url": "https://progit2.s3.amazonaws.com/en/2015-03-06-439c2/progit-en.376.pdf",
+        "tags": "version control, git",
+        "title": "Pro Git"
+    },
+    {
+        "authors": "Marijn Haverbeke ",
+        "image_url": "http://hackershelf.com/media/cache/e5/27/e527064919530802af898a4798318ab9.jpg",
+        "pdf_url": "http://eloquentjavascript.net/Eloquent_JavaScript.pdf",
+        "tags": "javascript",
+        "title": "Eloquent JavaScript"
+    },
+    {
+        "authors": "Allen B. Downey",
+        "image_url": "http://hackershelf.com/media/cache/97/bf/97bfce708365236e0a5f3f9e26b4a796.jpg",
+        "pdf_url": "http://greenteapress.com/compmod/thinkcomplexity.pdf",
+        "tags": "programming, python, data structures",
+        "title": "Think Complexity"
+    },
+    {
+        "authors": "Allen B. Downey",
+        "image_url": "http://hackershelf.com/media/cache/46/61/46613d24474140c53ea6b51386f888ff.jpg",
+        "pdf_url": "http://greenteapress.com/thinkstats/thinkstats.pdf",
+        "tags": "python, programming, statistics",
+        "title": "Think Stats"
+    },
+    {
+        "authors": "Sanjoy Mahajan",
+        "image_url": "http://hackershelf.com/media/cache/32/29/3229342ff48e816ca7e72442d05899ed.jpg",
+        "pdf_url": "http://mitpress.mit.edu/sites/default/files/titles/content/9780262514293_Creative_Commons_Edition.pdf",
+        "tags": "math",
+        "title": "Street-Fighting Mathematics"
+    },
+    {
+        "authors": "Allen B. Downey ",
+        "image_url": "http://hackershelf.com/media/cache/f3/fe/f3fec7d794709480759e9b311fb7f2ec.jpg",
+        "pdf_url": "http://greenteapress.com/thinkpython/thinkpython.pdf",
+        "tags": "python, cs",
+        "title": "Think Python"
+    },
+    {
+        "authors": "Mark Murphy",
+        "image_url": "http://hackershelf.com/media/cache/f4/ff/f4ffe343566469f4cbdc3423a7d1e130.jpg",
+        "pdf_url": "http://commonsware.com/Android/toc.pdf",
+        "tags": "tutorials, practical, java, html5, android",
+        "title": "Android Programming Tutorials"
+    },
+    {
+        "authors": "David J.C. MacKay",
+        "image_url": "http://hackershelf.com/media/cache/84/e9/84e9b9e250c917f926f1762aabdd5d83.jpg",
+        "pdf_url": "http://www.inference.phy.cam.ac.uk/itprnn/book.pdf",
+        "tags": "information theory, learning algorithms",
+        "title": "Information Theory, Inference, and Learning Algorithms "
+    },
+    {
+        "authors": "Swaroop C H",
+        "image_url": "http://hackershelf.com/media/cache/8f/2d/8f2da968434ae99681ed8fbf647a94bb.jpg",
+        "pdf_url": "http://files.swaroopch.com/vim/byte_of_vim_v051.pdf",
+        "tags": "vim",
+        "title": "A Byte Of Vim"
+    },
+    {
+        "authors": "Alex Smola",
+        "image_url": "http://hackershelf.com/media/cache/2a/53/2a533240e22f1c70719fde0edbf85a7f.jpg",
+        "pdf_url": "http://alex.smola.org/drafts/thebook.pdf",
+        "tags": "machine learning, optimization",
+        "title": "Introduction to Machine Learning "
+    },
+    {
+        "authors": "Steven M. LaVelle",
+        "image_url": "http://hackershelf.com/media/cache/42/ed/42edaaf0db7bcc2902c5d625a33be1b5.jpg",
+        "pdf_url": "http://planning.cs.uiuc.edu/bookbig.pdf",
+        "tags": "algorithms, robotics, artificial intelligence, control theory, planning, game theory",
+        "title": "Planning Algorithms"
+    },
+    {
+        "authors": "Lars Wirzenius",
+        "image_url": "http://hackershelf.com/media/cache/21/6d/216de0ea1541523f9a5cf5108fd0a37c.jpg",
+        "pdf_url": "http://files.liw.fi/gtdfh.pdf",
+        "tags": "gtd",
+        "title": "GTD For Hackers"
+    },
+    {
+        "authors": "Ross J. Anderson",
+        "image_url": "http://hackershelf.com/media/cache/b5/c6/b5c6bb1d0107a58bb697f712b7289b17.jpg",
+        "pdf_url": "http://www.cl.cam.ac.uk/~rja14/musicfiles/manuscripts/SEv1.pdf",
+        "tags": "distributed systems, cryptography, access controls, security",
+        "title": "Security Engineering"
+    },
+    {
+        "authors": "Cody Lindley",
+        "image_url": "http://hackershelf.com/media/cache/18/a5/18a5d01bbc0a7b1386257180a3a13669.jpg",
+        "pdf_url": "http://javascriptenlightenment.com/JavaScript_Enlightenment.pdf",
+        "tags": "javascript, programming, js",
+        "title": "JavaScript Enlightenment"
+    },
+    {
+        "authors": "Jeff Heard",
+        "image_url": "http://hackershelf.com/media/cache/22/76/22765abc7228eba3944a1656a595617b.jpg",
+        "pdf_url": "http://vis.renci.org/jeff/wp-content/uploads/2009/01/beautifulcode.pdf",
+        "tags": "graphics, haskell",
+        "title": "Beautiful Code, Compelling Evidence"
+    },
+    {
+        "authors": "Eric Sink",
+        "image_url": "http://hackershelf.com/media/cache/09/85/0985f617a7e7912300ddcf25fbd60b89.jpg",
+        "pdf_url": "http://ericsink.com/vcbe/vcbe_a4_lo.pdf",
+        "tags": "subversion, dvcs, veracity, mercurial, version control, git, distributed version control system",
+        "title": "Version Control by Example"
+    },
+    {
+        "authors": "Jim Hefferon",
+        "image_url": "http://hackershelf.com/media/cache/43/71/43711527fbc1a6935b5a416751ce6251.jpg",
+        "pdf_url": "http://joshua.smcvt.edu/linearalgebra/book.pdf",
+        "tags": "linear algebra, matrix computations",
+        "title": "Linear Algebra"
+    },
+    {
+        "authors": "Jeff Heard, Anand Rajaraman, Stefane Laborde",
+        "image_url": "http://hackershelf.com/media/cache/06/df/06df282659657e529d8111e08aa79274.jpg",
+        "pdf_url": "http://infolab.stanford.edu/~ullman/mmds/book.pdf",
+        "tags": "data mining, text processing",
+        "title": "Mining of Massive Datasets"
+    },
+    {
+        "authors": "Dick Grune, Ceriel J.H. Jacobs",
+        "image_url": "http://hackershelf.com/media/cache/04/70/04706e1e5c70039f43203d044af9316e.jpg",
+        "pdf_url": "http://dickgrune.com/Books/PTAPG_1st_Edition/BookBody.pdf",
+        "tags": "compilers, parsing",
+        "title": "Parsing Techniques"
+    },
+    {
+        "authors": "Karl Seguin",
+        "image_url": "http://hackershelf.com/media/cache/84/ad/84ad3664388a54bf9dd8b87361d214ed.jpg",
+        "pdf_url": "http://openmymind.net/FoundationsOfProgramming.pdf",
+        "tags": "programming",
+        "title": "Foundations of Programming"
+    },
+    {
+        "authors": "Karl Seguin",
+        "image_url": "http://hackershelf.com/media/cache/02/28/0228bd481dc84f0b9b689716cb5ed026.jpg",
+        "pdf_url": "http://openmymind.net/mongodb.pdf",
+        "tags": "nosql, mongodb, databases",
+        "title": "The Little MongoDB Book"
+    },
+    {
+        "authors": "E. Hoigaard",
+        "image_url": "http://hackershelf.com/media/cache/6b/b8/6bb892c7e7040ad51c597d03f941eedd.jpg",
+        "pdf_url": "http://autotelicum.github.io/Smooth-CoffeeScript/Smooth%20CoffeeScript%20Web%20Optimized.pdf",
+        "tags": "js, web development, web-design, javascript, coffeescript",
+        "title": "Smooth coffeescript"
+    },
+    {
+        "authors": "Caleb Doxsey",
+        "image_url": "http://hackershelf.com/media/cache/09/ad/09ad5199bbacbc8180465378365e8b4e.jpg",
+        "pdf_url": "http://www.golang-book.com/assets/pdf/gobook.pdf",
+        "tags": "programming, go, golang",
+        "title": "An Introduction to Programming in Go"
+    },
+    {
+        "authors": "Karl Fogel",
+        "image_url": "http://hackershelf.com/media/cache/db/66/db66e97021eda606c4349e5e5274f1b4.jpg",
+        "pdf_url": "http://producingoss.com/en/producingoss.pdf",
+        "tags": "foss, open source processes, community management, open source",
+        "title": "Producing Open Source Software "
+    },
+    {
+        "authors": "Pieter Hartel, Henk Muller",
+        "image_url": "http://hackershelf.com/media/cache/f3/7b/f37b71b0928b0f1c5fdb3442f832c944.jpg",
+        "pdf_url": "http://eprints.eemcs.utwente.nl/1077/02/book.pdf",
+        "tags": "c, functional",
+        "title": "Functional C"
+    },
+    {
+        "authors": "Clifford A. Shaffer",
+        "image_url": "http://hackershelf.com/media/cache/03/9c/039c5dc17d213a9bd8995d787fc9e45e.jpg",
+        "pdf_url": "http://people.cs.vt.edu/~shaffer/Book/C++3elatest.pdf",
+        "tags": "algorithms, programming",
+        "title": "Data Structures and Algorithm Analysis in C++"
+    },
+    {
+        "authors": "Andi Gutmans, Stig Bakken, Derick Rethans",
+        "image_url": "http://hackershelf.com/media/cache/c0/cb/c0cb7c7b9e516eb257ee873cd2eaf455.jpg",
+        "pdf_url": "http://ptgmedia.pearsoncmg.com/image_urls/013147149X/downloads/013147149X_book.pdf",
+        "tags": "programing, php",
+        "title": "PHP 5 Power Programing"
+    },
+    {
+        "authors": "Trinna Chiasson, Dyanna Gregory, Contributors",
+        "image_url": "http://hackershelf.com/media/cache/d5/c1/d5c1bb30894ecee940da27d00c0498ed.jpg",
+        "pdf_url": "http://orm-atlas2-prod.s3.amazonaws.com/pdf/13a07b19e01a397d8855c0463d52f454.pdf",
+        "tags": "design, data visualization",
+        "title": "Data + Design"
+    },
+    {
+        "authors": "Clifford A. Shaffer",
+        "image_url": "http://hackershelf.com/media/cache/f7/f5/f7f572bf7f234f8bd068e608c0d3ef22.jpg",
+        "pdf_url": "http://people.cs.vt.edu/~shaffer/Book/JAVA3elatest.pdf",
+        "tags": "algorithms, programming, java",
+        "title": "Data Structures and Algorithm Analysis in Java"
+    },
+    {
+        "authors": "Herbert S. Wilf, Albert Nijenhuis",
+        "image_url": "http://hackershelf.com/media/cache/35/98/3598f6116dedc9ad6fddb43e63914264.jpg",
+        "pdf_url": "http://www.math.upenn.edu/~wilf/website/CombinatorialAlgorithms.pdf",
+        "tags": "algorithms, math",
+        "title": "Combinatorial Algorithms"
+    }
+]

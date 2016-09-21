@@ -2,7 +2,7 @@
 //  Tag+CoreDataProperties.swift
 //  HackerBooksPro
 //
-//  Created by Jacobo Enriquez Gabeiras on 18/9/16.
+//  Created by Jacobo Enriquez Gabeiras on 21/9/16.
 //  Copyright © 2016 enanibus. All rights reserved.
 //
 
@@ -16,8 +16,8 @@ extension Tag {
         return NSFetchRequest<Tag>(entityName: "Tag");
     }
 
-    @NSManaged public var tagName: String?
     @NSManaged public var proxyForSorting: String?
+    @NSManaged public var tagName: String?
     @NSManaged public var bookTags: NSSet?
 
 }
