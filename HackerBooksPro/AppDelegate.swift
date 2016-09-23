@@ -16,13 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let model = CoreDataStack(modelName: "HackerBooksPro", inMemory: false)!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // For testing
+        
+        print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])
+        
         try! model.dropAllData()
-        
-        
-        
-        // JSON File is load in main queue, it's a small file
-        // it should be put also
         
         do{
             try downloadRemoteJSON()
@@ -40,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            let jsonDicts = try JSONSerialization.jsonObject(with: jsonData as Data, options: .allowFragments) as? JSONArray
             
             for oneDict in jsonArray{
-//                do{
+                do{
                     let bookValues =  try decodeForCoreData(book: oneDict)
                     let title = bookValues.4
                     let authors = bookValues.0
@@ -66,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         theAuthor.addToBooks(oneBook)
                     }
                     
-//                }
+                }
             }
             
         }catch{

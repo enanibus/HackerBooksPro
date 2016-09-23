@@ -29,12 +29,12 @@ public class Tag: NSManagedObject {
         let entity = NSEntityDescription.entity(forEntityName: Tag.entityName, in: context)!
         if (Tag.exists(tag, inContext: context)==false){
             self.init(entity: entity, insertInto: context)
-            if (tag.lowercased()=="favorite"){
-                self.tagName = "0"+tag.lowercased()
+            if (tag.lowercased()==FAVORITES){
+                self.proxyForSorting = "__" + FAVORITES
             }else{
-                self.tagName = "1"+tag.lowercased()
+                self.proxyForSorting = tag
             }
-            self.proxyForSorting = nil
+            self.tagName = tag
             self.bookTags = nil
             
         }else{

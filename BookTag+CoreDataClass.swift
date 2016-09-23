@@ -17,5 +17,6 @@ public class BookTag: NSManagedObject {
         self.init(entity: entity, insertInto: context)
         self.book = theBook
         self.tag = theTag
+        self.name = theBook.title! + theTag.tagName!
     }
 }

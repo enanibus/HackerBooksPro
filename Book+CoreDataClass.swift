@@ -21,7 +21,7 @@ public class Book: NSManagedObject {
             self.imageURL = imgURL
             self.isFavorite = false
             // Imagen vacia
-//            self.cover = Cover(book: self, inContext: context)
+            self.cover = Cover(book: self, inContext: context)
         }
         else{
             self.init(entity: entity, insertInto: nil)
