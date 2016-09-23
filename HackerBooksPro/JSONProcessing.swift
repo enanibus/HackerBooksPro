@@ -33,6 +33,23 @@ typealias JSONDictionary = [String : JSONObject]
 typealias JSONArray = [JSONDictionary]
 
 //MARK: - Decodification
+
+func decodeForCoreData (book dict: JSONDictionary) throws ->
+    ([String],URL,URL,[String],String){
+        try validate(dictionary: dict)
+        func extract(key: String) -> String{
+            return dict[key]!   // we know it can't be missing because we validated first!
+        }
+        let authors = parseCommaSeparated(string: extract(key: "authors"))
+        let imgURL = URL(string: extract(key: "image_url"))!
+        let pdfURL = URL(string: extract(key: "pdf_url"))!
+        let tags = parseCommaSeparated(string: extract(key: "tags"))
+        let title = extract(key: "title").capitalized
+        
+        return (authors,imgURL,pdfURL,tags,title)
+}
+
+/*
 func decode(book dict: JSONDictionary) throws -> Book{
     
    // validate first
@@ -47,7 +64,7 @@ func decode(book dict: JSONDictionary) throws -> Book{
     let authors = parseCommaSeparated(string: extract(key: "authors"))
     let imgURL = URL(string: extract(key: "image_url"))!
     let pdfURL = URL(string: extract(key: "pdf_url"))!
-    let tags = Tags(parseCommaSeparated(string: extract(key: "tags")).map{Tag(name: $0)})
+    let tags = parseCommaSeparated(string: extract(key: "tags"))
     let title = extract(key: "title").capitalized
     
     let mainBundle = Bundle.main
@@ -63,7 +80,8 @@ func decode(book dict: JSONDictionary) throws -> Book{
     return Book(title: title, authors: authors, tags: tags, pdf: pdf, image: image)
     
 }
-
+*/
+ 
 func decode(book dict: JSONDictionary?) throws -> Book{
     
     guard let d = dict else {
