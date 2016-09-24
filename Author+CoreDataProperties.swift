@@ -2,7 +2,7 @@
 //  Author+CoreDataProperties.swift
 //  HackerBooksPro
 //
-//  Created by Jacobo Enriquez Gabeiras on 21/9/16.
+//  Created by Jacobo Enriquez Gabeiras on 24/9/16.
 //  Copyright © 2016 enanibus. All rights reserved.
 //
 

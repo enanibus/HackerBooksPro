@@ -36,7 +36,7 @@ extension LibraryTableViewController{
         }
         
         cell?.textLabel?.text = book.title
-        cell?.detailTextLabel?.text = book.authors?.description
+        cell?.detailTextLabel?.text = book.listOfAuthors()
         
         
         return cell!

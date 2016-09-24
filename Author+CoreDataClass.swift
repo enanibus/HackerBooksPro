@@ -16,14 +16,17 @@ public class Author: NSManagedObject {
     convenience init(author: String, inContext context: NSManagedObjectContext){
         
         let entity = NSEntityDescription.entity(forEntityName: Author.entityName, in: context)!
-        if (Author.exists(author, inContext: context)==false){
-            self.init(entity: entity, insertInto: context)
-            self.name = author
-            self.books = nil
-        }else{
-            self.init(entity: entity, insertInto: nil)
-        }
-        
+//        if (Author.exists(author, inContext: context)==false){
+//            self.init(entity: entity, insertInto: context)
+//            self.name = author
+//            self.books = nil
+//        }else{
+//            self.init(entity: entity, insertInto: nil)
+//        }
+//        
+        // llamamos a super
+        self.init(entity: entity, insertInto: context)
+        self.name = author
         
     }
     

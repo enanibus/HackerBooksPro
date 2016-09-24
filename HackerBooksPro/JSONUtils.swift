@@ -129,7 +129,8 @@ func getJSONFromDocuments() throws -> NSData{
     }
     let datos = NSData(contentsOf: newUrl as URL)
     guard let data = datos else{
-        throw HackerBooksError.wrongJSONFormat    }
+        throw HackerBooksError.wrongJSONFormat
+    }
     return data
 }
 

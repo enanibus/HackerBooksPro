@@ -69,6 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         let theAuthor = Author(author: sAuthor, inContext: model.context)
                         theAuthor.addToBooks(oneBook)
                     }
+//                    print(oneBook)
                 }catch{
                     fatalError("Error while loading model")
                 }
