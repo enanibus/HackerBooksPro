@@ -27,7 +27,7 @@ func loadFromLocalFile(fileName name: String, bundle: Bundle = Bundle.main) thro
     
     if let url = bundle.url(forResource: name, withExtension: "json"),
         let data = NSData(contentsOf: url),
-        let maybeArray = try? JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as? JSONArray,
+        let maybeArray = try? JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions.allowFragments) as? JSONArray,
         let array = maybeArray{
         
         return array
@@ -41,7 +41,7 @@ func loadFromURL() throws -> JSONArray{
     
     if let url = NSURL(string: REMOTE_LIBRARY_URL),
         let data = NSData(contentsOf: url as URL),
-        let maybeArray = try? JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as? JSONArray,
+        let maybeArray = try? JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions.allowFragments) as? JSONArray,
         let array = maybeArray{
         return array
     }else{
@@ -52,7 +52,7 @@ func loadFromURL() throws -> JSONArray{
 func loadFromDocuments() throws -> JSONArray{
     do{
         let data = try getJSONFromDocuments()
-        if let maybeArray = try? JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as? JSONArray,
+        if let maybeArray = try? JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions.allowFragments) as? JSONArray,
             let array = maybeArray{
             return array
         } else{

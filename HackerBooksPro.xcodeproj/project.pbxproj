@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A02831C1D944E970075FD61 /* Author+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3F418D1D8F33F200DB7713 /* Author+CoreDataClass.swift */; };
 		0A3173451D95EAF5004E5D68 /* Book+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3173441D95EAF5004E5D68 /* Book+CoreDataProperties.swift */; };
+		0A3173471D967506004E5D68 /* LibraryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3173461D967506004E5D68 /* LibraryTableViewController.swift */; };
 		0A37DF871D84311B00069E24 /* HackerBooksPro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0A37DF851D84311B00069E24 /* HackerBooksPro.xcdatamodeld */; };
 		0A3F41971D8F33F200DB7713 /* Book+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3F41851D8F33F200DB7713 /* Book+CoreDataClass.swift */; };
 		0A3F41991D8F33F200DB7713 /* Pdf+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3F41871D8F33F200DB7713 /* Pdf+CoreDataClass.swift */; };
@@ -71,6 +72,7 @@
 
 /* Begin PBXFileReference section */
 		0A3173441D95EAF5004E5D68 /* Book+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Book+CoreDataProperties.swift"; path = "../Book+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0A3173461D967506004E5D68 /* LibraryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryTableViewController.swift; sourceTree = "<group>"; };
 		0A37DF861D84311B00069E24 /* HackerBooksPro.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HackerBooksPro.xcdatamodel; sourceTree = "<group>"; };
 		0A3F41851D8F33F200DB7713 /* Book+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Book+CoreDataClass.swift"; path = "../Book+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0A3F41871D8F33F200DB7713 /* Pdf+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Pdf+CoreDataClass.swift"; path = "../Pdf+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				0A4E88521D92EF2F00C59AD6 /* CoreDataTableViewController.swift */,
+				0A3173461D967506004E5D68 /* LibraryTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				0A4E88471D92E50900C59AD6 /* Tag+CoreDataProperties.swift in Sources */,
 				0A4E885C1D92F38800C59AD6 /* Errors.swift in Sources */,
 				0A3173451D95EAF5004E5D68 /* Book+CoreDataProperties.swift in Sources */,
+				0A3173471D967506004E5D68 /* LibraryTableViewController.swift in Sources */,
 				0A3F419F1D8F33F200DB7713 /* Author+CoreDataClass.swift in Sources */,
 				0A4E88491D92E50900C59AD6 /* Localization+CoreDataProperties.swift in Sources */,
 				0A456AB51D7F68AD00A09089 /* AppDelegate.swift in Sources */,

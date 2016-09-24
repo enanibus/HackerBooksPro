@@ -7,34 +7,41 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
     let model = CoreDataStack(modelName: "HackerBooksPro", inMemory: false)!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])
         
+        // Clean up all local caches
+        AsyncData.removeAllLocalFiles()
+        
+        // Create the window
+        window = UIWindow(frame: UIScreen.main.bounds)
+        
+        // Borrar el modelo
         try! model.dropAllData()
         
+        // Descarga JSON
+        // Pendiente realizar en background con GCD
         do{
             try downloadRemoteJSON()
         }catch{
             fatalError("Data couldn't be load")
         }
         
-        // Process JSON File and fill CoreData, background
-        //if (isFirstLaunch()==true){
-        //    markFirstLaunch(to: false)
-        
+        // Carga del modelo Core Data
+        // Pendiente realizar en background con GCD
+        // y de hacerlo en una función auxiliar
+//    if () {
         do{
             let jsonArray = try loadFromDocuments()
-//            let jsonData = try loadJSONFile()
-//            let jsonDicts = try JSONSerialization.jsonObject(with: jsonData as Data, options: .allowFragments) as? JSONArray
             
             for oneDict in jsonArray{
                 do{
@@ -62,36 +69,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         let theAuthor = Author(author: sAuthor, inContext: model.context)
                         theAuthor.addToBooks(oneBook)
                     }
-                    
+                }catch{
+                    fatalError("Error while loading model")
                 }
             }
-            
         }catch{
-            fatalError("Json File is not downloaded")
+            fatalError("Error while loading JSON")
         }
         model.save()
-        //}
+//    }
         // Fetch request
-/*
+
         let fr = NSFetchRequest<Book>(entityName: Book.entityName)
         fr.fetchBatchSize = 50
         fr.sortDescriptors = [NSSortDescriptor(key: "title",ascending: true)]
         
         let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: model.context, sectionNameKeyPath: nil, cacheName: nil)
         
-        // Create viewController
+        // Create LibraryTableViewController
         
-        let nVC = BookTableViewController(fetchedResultsController: fc as! NSFetchedResultsController<NSFetchRequestResult>, style: .plain)
+        let nVC = LibraryTableViewController(fetchedResultsController: fc as! NSFetchedResultsController<NSFetchRequestResult>, style: .plain)
         
         
         // Creamos el navegador
         let navVC = UINavigationController(rootViewController: nVC)
  
         // La window
-        window = UIWindow(frame: UIScreen.main.bounds)
+//        window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navVC
         window?.makeKeyAndVisible()
-*/
+
         
         
         
