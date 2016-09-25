@@ -16,7 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let model = CoreDataStack(modelName: "HackerBooksPro", inMemory: false)!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+    
+    
         print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])
         
         // Clean up all local caches

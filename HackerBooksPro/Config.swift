@@ -12,7 +12,7 @@ import UIKit
 public let REMOTE_LIBRARY_URL                   =   "https://t.co/K9ziV0z3SJ"
 public let FAVORITES                            =   "favorites"
 public let JSON_LIBRARY_FILE                    =   "books_readable.json"
-public let COVER_FILE                           =   "PlaceholderBook.png"
+public let COVER_FILE                           =   "emptyBookCover.png"
 public let JSON_DOWNLOADED                      =   "jsonDownloadedInDocuments"
 public let LAST_BOOK_READ                       =   "lastBookRead"
 public let BOOK_KEY                             =   "BookKey"

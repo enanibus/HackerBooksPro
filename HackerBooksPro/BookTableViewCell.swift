@@ -19,10 +19,19 @@ class BookTableViewCell: UITableViewCell {
     @IBOutlet weak var authorsView: UILabel!
     @IBOutlet weak var tagsView: UILabel!
     
+    var coverImage : UIImage? {
+        didSet {
+            self.coverView.image = coverImage
+        }
+    }
+    
+    //MARK: - Utils
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.coverView.layer.masksToBounds = true
+        self.coverView.layer.cornerRadius = 8
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

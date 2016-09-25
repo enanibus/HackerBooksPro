@@ -10,18 +10,21 @@ import UIKit
 import CoreData
 
 class LibraryTableViewController: CoreDataTableViewController {
-
+    
+    
 }
 
 //MARK: - DataSource
 extension LibraryTableViewController{
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "HackerBooksPro"
         
         registerNib()
+        
+// Pendiente hacer NSFetchedResultsController
+// Manera elegante del Data Source
         
     }
     
@@ -34,39 +37,26 @@ extension LibraryTableViewController{
         let tagList = Tag.allTags(fetchedResultsController?.managedObjectContext)
         let tagSection = tagList?[indexPath.section]
         
-        // Book list
+        // Book list del tag en cuestión
         let bookList = BookTag.booksForTag(theTag: tagSection!, inContext: fetchedResultsController?.managedObjectContext)
         
-        // Item con book(forIndexPath: indexPath), pendiente
-
-        // Create cell
-//        var cell = tableView.dequeueReusableCell(withIdentifier: cellId)
-//        if cell == nil{
-//            cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellId)
-//        }
-        
-//        cell?.textLabel?.text = bookList?[indexPath.row].book?.title
-//        cell?.detailTextLabel?.text = bookList?[indexPath.row].book?.listOfAuthors()
-        
-        let mainBundle = Bundle.main
-        let defaultImageUrl = mainBundle.url(forResource: "emptyBookCover", withExtension: "png")!
-        let data = try! Data(contentsOf: defaultImageUrl)
-        let img = UIImage(data: data as Data)!
-        
-//        cell?.imageView?.image = img
+        // Identificamos el book
+        let item = bookList?[indexPath.row].book
         
         // Celda personalizada
         let cell = tableView.dequeueReusableCell(withIdentifier: BookTableViewCell.cellID, for: indexPath) as! BookTableViewCell
         
-        cell.coverView.image = img
-        cell.titleView.text = bookList?[indexPath.row].book?.title
-        cell.authorsView.text = bookList?[indexPath.row].book?.listOfAuthors()
-        cell.tagsView.text = bookList?[indexPath.row].book?.listOfTags()
-        
         // Sincronizar book -> celda
-//        cell.imageView?.image = item.cover.getImage()
-//        cell.bookTitle.text = item.title
+        cell.titleView.text = item?.title
+        cell.authorsView.text = item?.listOfAuthors()
+        cell.tagsView.text = item?.listOfTags()
         
+        UIView.transition(with: cell.coverView,
+                          duration: 0.3,
+                          options: [.curveEaseOut],
+                          animations: { cell.coverView.image = self.getCover(ofBook: item!)},
+                          completion: nil)
+
         // Mostrar condición de favorito en las listas
 //        if item.isFavorite {
 //            cell.isFavorite.setTitle("🌟", forState: .Normal)
@@ -109,6 +99,74 @@ extension LibraryTableViewController{
         let bookTagList = BookTag.booksForTag(theTag: theTag!, inContext: fetchedResultsController?.managedObjectContext)
         return (bookTagList?.count)!
     }
+
+}
     
-    
+    //MARK: - Utils
+    extension LibraryTableViewController {
+        func getCover(ofBook item:Book)->UIImage{
+            
+            let mainBundle = Bundle.main
+            let defaultImageUrl = mainBundle.url(forResource: "emptyBookCover", withExtension: "png")!
+            let data = try! Data(contentsOf: defaultImageUrl)
+            let img = UIImage(data: data as Data)!
+            
+            if let img = item.cover?.image {
+                return img
+            }
+            else {
+                DispatchQueue.global(qos: .default).async { () -> Void in
+                    
+                    if let url = NSURL(string:(item.imageURL!)) {
+                        if let data = NSData(contentsOf: url as URL) {
+                            print("Downloading... \(url)")
+                            if let image = UIImage(data: data as Data) {
+                                print("Finish of downloading \(url)")
+                                DispatchQueue.main.async {
+                                    item.cover?.image = image
+                                    self.tableView.reloadData()
+                                    try! item.managedObjectContext?.save()
+                                }
+                                    
+                            }
+                        }
+                    }
+                }
+            }
+            return img
+        }
+
+        func downloadCover(ofBook book:Book)->UIImage{
+            if (book.cover?.photoData==nil){
+                let mainBundle = Bundle.main
+                let defaultImage = mainBundle.url(forResource: "emptyBookCover", withExtension: "png")!
+                
+                // AsyncData
+                let theDefaultData = try! Data(contentsOf: defaultImage)
+                
+                DispatchQueue.global(qos: .default).async {
+                    let theUrlImage = URL(string: book.imageURL!)
+                    let imageData = try? Data(contentsOf: theUrlImage!)
+                    DispatchQueue.main.async {
+                        if (imageData==nil){
+                            book.cover?.photoData = nil
+                        }
+                        else{
+                            book.cover?.photoData = imageData as NSData?
+                            
+                            self.tableView.reloadData()
+                            
+                            try! book.managedObjectContext?.save()
+                            
+                        }
+                    }
+                }
+                // Hay que mandar que descargue en segundo plano
+                return UIImage(data: theDefaultData)!
+            }
+            else{
+                return (book.cover?.image!)!
+            }
+        }
+        
 }

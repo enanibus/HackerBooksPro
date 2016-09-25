@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 public class Book: NSManagedObject {
     static let entityName = "Book"
@@ -68,5 +69,5 @@ extension Book{
         }
         
     }
-    
 }
+
