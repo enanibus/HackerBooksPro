@@ -13,11 +13,23 @@ enum Directories{
     case Cache
 }
 
+let defaults = UserDefaults.standard
+
+func saveLastBookReadInUserDefaults(book: Book) {
+    if let data = archiveURIRepresentation(book: book) {
+        defaults.set(data, forKey: LAST_BOOK_READ)
+    }
+}
+
+func archiveURIRepresentation(book: Book) -> NSData? {
+    let uri = book.objectID.uriRepresentation()
+    return NSKeyedArchiver.archivedData(withRootObject: uri) as NSData?
+}
+
 
 //MARK: - NSUserDefaults & Favorites management
 
 func setDefaults(){
-    let defaults = UserDefaults.standard
     let fav = defaults.array(forKey: FAVORITES)
     
     defaults.set(JSON_DOWNLOADED, forKey: JSON_DOWNLOADED)
@@ -26,7 +38,6 @@ func setDefaults(){
 }
 
 func getFavoritesFromNSDefault() -> [String]{
-    let defaults = UserDefaults.standard
     guard let fav = defaults.array(forKey: FAVORITES) as? [String] else{
         return []
     }
@@ -34,7 +45,6 @@ func getFavoritesFromNSDefault() -> [String]{
 }
 
 func addFavoriteToNSDefault(withBookTitle title: String){
-    let defaults = UserDefaults.standard
     var fav = getFavoritesFromNSDefault()
         fav.append(title)
         defaults.set(fav, forKey: FAVORITES)
@@ -42,7 +52,6 @@ func addFavoriteToNSDefault(withBookTitle title: String){
 }
 
 func deleteFavoriteToNSDefault(withBookTitle title: String?){
-    let defaults = UserDefaults.standard
     var fav = getFavoritesFromNSDefault()
     if title != nil {
         fav.remove(at: (fav.index(of: title!))!)

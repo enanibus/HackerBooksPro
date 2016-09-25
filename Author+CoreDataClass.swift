@@ -16,18 +16,13 @@ public class Author: NSManagedObject {
     convenience init(author: String, inContext context: NSManagedObjectContext){
         
         let entity = NSEntityDescription.entity(forEntityName: Author.entityName, in: context)!
-//        if (Author.exists(author, inContext: context)==false){
-//            self.init(entity: entity, insertInto: context)
-//            self.name = author
-//            self.books = nil
-//        }else{
-//            self.init(entity: entity, insertInto: nil)
-//        }
-//        
-        // llamamos a super
-        self.init(entity: entity, insertInto: context)
-        self.name = author
-        
+        if (Author.exists(author, inContext: context)==false){
+            self.init(entity: entity, insertInto: context)
+            self.name = author
+            self.books = nil
+        }else{
+            self.init(entity: entity, insertInto: nil)
+        }
     }
     
     
@@ -49,6 +44,28 @@ extension Author {
             return ((resp.count)>0)
         } catch{
             return false;
+        }
+        
+    }
+    
+    static func authorForString(_ author: String, inContext context: NSManagedObjectContext?) -> Author?{
+        let fr = NSFetchRequest<Author>(entityName: Author.entityName)
+        fr.fetchLimit = 1
+        fr.fetchBatchSize = 1
+        fr.predicate = NSPredicate(format: "name == [c] %@", author)
+        do{
+            let result = try context?.fetch(fr)
+            guard let resp = result else{
+                return nil
+            }
+            if (resp.count>0){
+                return resp.first
+            }
+            else{
+                return nil
+            }
+        } catch{
+            return nil
         }
         
     }

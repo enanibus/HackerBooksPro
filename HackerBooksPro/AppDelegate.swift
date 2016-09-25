@@ -66,10 +66,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         _ = BookTag(theBook: oneBook, theTag: theTag!, inContext: model.context)
                     }
                     for sAuthor in authors{
-                        let theAuthor = Author(author: sAuthor, inContext: model.context)
-                        theAuthor.addToBooks(oneBook)
+                        var theAuthor : Author?
+                        
+                        theAuthor = Author.authorForString(sAuthor, inContext: model.context)
+                        
+                        if (theAuthor == nil){
+                            theAuthor = Author(author: sAuthor, inContext: model.context)
+                        }
+                        // Add the relation between author and book
+                        theAuthor?.addToBooks(oneBook)
                     }
-//                    print(oneBook)
                 }catch{
                     fatalError("Error while loading model")
                 }

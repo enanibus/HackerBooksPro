@@ -11,18 +11,7 @@ import CoreData
 
 public class Tag: NSManagedObject {
     static let entityName = "Tag"
-    
-    var realTagName : String?{
-        get{
-            var a = self.tagName!
-            
-            a.remove(at: a.startIndex)
-            
-            return a
-            
-        }
-    }
-    
+        
     
     convenience init(tag: String, inContext context: NSManagedObjectContext){
         
@@ -88,6 +77,37 @@ extension Tag {
             return nil;
         }
         
-    }    
+    }
+    
+    
+    static func count(_ context: NSManagedObjectContext?) -> Int{
+        let fr = NSFetchRequest<Tag>(entityName: Tag.entityName)
+        do{
+            let result = try context?.fetch(fr)
+            guard let resp = result else{
+                return 0
+            }
+            return resp.count
+        }catch{
+            return 0
+        }
+        
+    }
+    
+    static func allTags(_ context: NSManagedObjectContext?)->[Tag]? {
+        let fr = NSFetchRequest<Tag>(entityName: Tag.entityName)
+        fr.sortDescriptors = [NSSortDescriptor.init(key: "tagName", ascending: true)]
+        
+        do{
+            let result = try context?.fetch(fr)
+            guard let resp = result else{
+                return nil
+            }
+            return resp
+        }catch{
+            return nil
+        }
+        
+    }
 }
 
