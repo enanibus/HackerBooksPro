@@ -49,6 +49,8 @@
 		0AD5DE771D9053E1001DB6C3 /* Localization+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3F41911D8F33F200DB7713 /* Localization+CoreDataClass.swift */; };
 		0AD5DE781D9053E4001DB6C3 /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3F41931D8F33F200DB7713 /* Photo+CoreDataClass.swift */; };
 		0AD5DE791D9053E6001DB6C3 /* Annotation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3F41951D8F33F200DB7713 /* Annotation+CoreDataClass.swift */; };
+		0AD6D0941D97DBD60007876C /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6D0931D97DBD60007876C /* BookTableViewCell.swift */; };
+		0AD6D0981D97F48A0007876C /* BookTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AD6D0971D97F48A0007876C /* BookTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +115,8 @@
 		0A4E88631D92F48900C59AD6 /* books_readable.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = books_readable.json; sourceTree = "<group>"; };
 		0A4E886A1D94479C00C59AD6 /* JSONUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONUtils.swift; sourceTree = "<group>"; };
 		0AD5DE6B1D903FD3001DB6C3 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		0AD6D0931D97DBD60007876C /* BookTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
+		0AD6D0971D97F48A0007876C /* BookTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,10 +228,11 @@
 		0A456AB31D7F68AD00A09089 /* HackerBooksPro */ = {
 			isa = PBXGroup;
 			children = (
+				0A37DF841D84306300069E24 /* Resources */,
 				0A4E88561D92F33E00C59AD6 /* Settings */,
 				0A4E88551D92F33700C59AD6 /* Utils */,
+				0AD6D0901D97DB7E0007876C /* Views */,
 				0A4E88511D92EF2400C59AD6 /* Controllers */,
-				0A37DF841D84306300069E24 /* Resources */,
 				0A37DF7F1D84302000069E24 /* Model */,
 				0A456AB41D7F68AD00A09089 /* AppDelegate.swift */,
 				0A456AB61D7F68AD00A09089 /* ViewController.swift */,
@@ -284,6 +289,15 @@
 				0A4E885B1D92F38800C59AD6 /* Errors.swift */,
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		0AD6D0901D97DB7E0007876C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0AD6D0931D97DBD60007876C /* BookTableViewCell.swift */,
+				0AD6D0971D97F48A0007876C /* BookTableViewCell.xib */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -402,6 +416,7 @@
 				0A456ABC1D7F68AD00A09089 /* Assets.xcassets in Resources */,
 				0A4E88641D92F48900C59AD6 /* emptyBookCover.png in Resources */,
 				0A456ABA1D7F68AD00A09089 /* Main.storyboard in Resources */,
+				0AD6D0981D97F48A0007876C /* BookTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +468,7 @@
 				0A3173471D967506004E5D68 /* LibraryTableViewController.swift in Sources */,
 				0A3F419F1D8F33F200DB7713 /* Author+CoreDataClass.swift in Sources */,
 				0A4E88491D92E50900C59AD6 /* Localization+CoreDataProperties.swift in Sources */,
+				0AD6D0941D97DBD60007876C /* BookTableViewCell.swift in Sources */,
 				0A456AB51D7F68AD00A09089 /* AppDelegate.swift in Sources */,
 				0A4E884A1D92E50900C59AD6 /* Photo+CoreDataProperties.swift in Sources */,
 				0A4E88681D943B6700C59AD6 /* JSONProcessing.swift in Sources */,
