@@ -26,7 +26,8 @@ extension LibraryTableViewController{
         // Fetch request por BookTag
         let fr = NSFetchRequest<BookTag>(entityName: BookTag.entityName)
         fr.fetchBatchSize = 50
-        fr.sortDescriptors = [NSSortDescriptor(key: "tag.proxyForSorting",ascending: true)]
+        fr.sortDescriptors = [(NSSortDescriptor(key: "tag.proxyForSorting",ascending: true)),
+                              (NSSortDescriptor(key: "book.title",ascending: true))]
         let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: (model?.context)!, sectionNameKeyPath: "tag.tagName", cacheName: nil)
         self.fetchedResultsController? = fc as! NSFetchedResultsController<NSFetchRequestResult>
         
@@ -48,6 +49,7 @@ extension LibraryTableViewController{
         // Identificamos el book
         let item = bookList?[indexPath.row].book
 */
+        
         // Celda personalizada
         let cell = tableView.dequeueReusableCell(withIdentifier: BookTableViewCell.cellID, for: indexPath) as! BookTableViewCell
 
