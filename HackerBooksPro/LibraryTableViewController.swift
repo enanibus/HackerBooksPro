@@ -11,20 +11,24 @@ import CoreData
 
 class LibraryTableViewController: CoreDataTableViewController {
     
+    var model = CoreDataStack(modelName: "HackerBooksPro", inMemory: false)
     
 }
 
 //MARK: - DataSource
 extension LibraryTableViewController{
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "HackerBooksPro"
-        
         registerNib()
         
-// Pendiente hacer NSFetchedResultsController
-// Manera elegante del Data Source
+        // Fetch request por BookTag
+        let fr = NSFetchRequest<BookTag>(entityName: BookTag.entityName)
+        fr.fetchBatchSize = 50
+        fr.sortDescriptors = [NSSortDescriptor(key: "tag.proxyForSorting",ascending: true)]
+        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: (model?.context)!, sectionNameKeyPath: "tag.tagName", cacheName: nil)
+        self.fetchedResultsController? = fc as! NSFetchedResultsController<NSFetchRequestResult>
         
     }
     
@@ -33,6 +37,7 @@ extension LibraryTableViewController{
         // Tipo de celda
 //        let cellId = "BookCell"
         
+/*
         // Look for the tag section
         let tagList = Tag.allTags(fetchedResultsController?.managedObjectContext)
         let tagSection = tagList?[indexPath.section]
@@ -42,19 +47,25 @@ extension LibraryTableViewController{
         
         // Identificamos el book
         let item = bookList?[indexPath.row].book
-        
+*/
         // Celda personalizada
         let cell = tableView.dequeueReusableCell(withIdentifier: BookTableViewCell.cellID, for: indexPath) as! BookTableViewCell
+
+        var booktag : BookTag
+        var item : Book
+       
+        booktag = self.fetchedResultsController?.object(at: indexPath) as! BookTag
+        item = booktag.book!
         
         // Sincronizar book -> celda
-        cell.titleView.text = item?.title
-        cell.authorsView.text = item?.listOfAuthors()
-        cell.tagsView.text = item?.listOfTags()
+        cell.titleView.text = item.title
+        cell.authorsView.text = item.listOfAuthors()
+        cell.tagsView.text = item.listOfTags()
         
         UIView.transition(with: cell.coverView,
                           duration: 0.3,
                           options: [.curveEaseOut],
-                          animations: { cell.coverView.image = self.getCover(ofBook: item!)},
+                          animations: { cell.coverView.image = self.getCover(ofBook: item)},
                           completion: nil)
 
         // Mostrar condición de favorito en las listas
@@ -67,10 +78,8 @@ extension LibraryTableViewController{
         
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return BookTableViewCell.cellHeight
-    }
+
+
     
     //MARK: - Cell registration
     private func registerNib(){
@@ -78,6 +87,11 @@ extension LibraryTableViewController{
         tableView.register(nib, forCellReuseIdentifier: BookTableViewCell.cellID)
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return BookTableViewCell.cellHeight
+    }
+
+/*
     //MARK: - Data Source
     override func numberOfSections(in tableView: UITableView) -> Int {
         let tagCount = Tag.count(fetchedResultsController?.managedObjectContext)
@@ -99,9 +113,9 @@ extension LibraryTableViewController{
         let bookTagList = BookTag.booksForTag(theTag: theTag!, inContext: fetchedResultsController?.managedObjectContext)
         return (bookTagList?.count)!
     }
-
-}
+*/
     
+}
     //MARK: - Utils
     extension LibraryTableViewController {
         func getCover(ofBook item:Book)->UIImage{

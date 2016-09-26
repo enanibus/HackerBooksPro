@@ -98,7 +98,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let nVC = LibraryTableViewController(fetchedResultsController: fc as! NSFetchedResultsController<NSFetchRequestResult>, style: .plain)
         
-        
         // Creamos el navegador
         let navVC = UINavigationController(rootViewController: nVC)
  
