@@ -25,6 +25,34 @@ public class Author: NSManagedObject {
         }
     }
     
+//    class func filterByAuthor(author a:String, inContext context: NSManagedObjectContext) -> [Book]? {
+//        
+//        let query = NSFetchRequest<Author>(entityName: Author.entityName)
+//        
+//        query.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+//        query.predicate = NSPredicate(format: "name contains [cd] %@", a)
+//        
+//        do {
+//            //primero busco todos los autores que encajen con lo puesto en el search
+//            let aut = try context.fetch(query as! NSFetchRequest<NSFetchRequestResult>) as? [Author]
+//            
+//            //ahora con todos estos autores, he de sacar los libros que han escrito, se pueden repetir, asi que lo meto en un NSSet
+//            //creo el conjunto de libros vacio
+//            var booksSet = Set<Book>()
+//            
+//            for each in aut! {
+//                //inserto los libros que tenga en el conjunto
+//                _ = each.books.map({booksSet.insert($0 as! Book)})
+//            }
+//            //tengo un nsset de BookModel, he de obtener un array ordenado
+//            let arr = booksSet.map({$0})
+//            return arr
+//            
+//        } catch {
+//            return nil
+//        }
+//        
+//    }
     
     
 }
