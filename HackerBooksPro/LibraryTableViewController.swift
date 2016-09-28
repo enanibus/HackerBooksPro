@@ -61,7 +61,7 @@ extension LibraryTableViewController{
         cell.tagsView.text = item?.listOfTags()
         
         UIView.transition(with: cell.coverView,
-                          duration: 0.3,
+                          duration: 0.7,
                           options: [.curveEaseOut],
                           animations: { cell.coverView.image = self.getCover(ofBook: item!)},
                           completion: nil)

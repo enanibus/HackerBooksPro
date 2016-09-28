@@ -47,7 +47,7 @@ class BookViewController: UIViewController {
         // Tags
         self.tagsView.text = model.listOfTags()
         
-        if ((self.model.isFavorite) != nil) {
+        if (self.model.isFavorite  == true) {
             self.favorites.title = "🌟"
         }else{
             self.favorites.title = "⭐️"
