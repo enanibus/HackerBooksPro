@@ -14,7 +14,7 @@ class LibraryTableViewController: CoreDataTableViewController, UISearchControlle
     let model = CoreDataStack(modelName: "HackerBooksPro", inMemory: false)
     let searchController = UISearchController(searchResultsController: nil)
     var filteredBooks = [Book]()
-    
+
 }
 
 extension LibraryTableViewController{
@@ -30,7 +30,7 @@ extension LibraryTableViewController{
         
         self.searchController.searchBar.sizeToFit()
         self.searchController.hidesNavigationBarDuringPresentation = false
-        self.searchController.searchBar.scopeButtonTitles = ["Titulo", "Tag", "Autor"]
+//        self.searchController.searchBar.scopeButtonTitles = ["Titulo", "Tag", "Autor"]
         self.searchController.searchBar.delegate = self
         self.tableView.tableHeaderView = searchController.searchBar
 
@@ -48,48 +48,22 @@ extension LibraryTableViewController{
     
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Tipo de celda
-//        let cellId = "BookCell"
-        
-/*
-        // Look for the tag section
-        let tagList = Tag.allTags(fetchedResultsController?.managedObjectContext)
-        let tagSection = tagList?[indexPath.section]
-        
-        // Book list del tag en cuestión
-        let bookList = BookTag.booksForTag(theTag: tagSection!, inContext: fetchedResultsController?.managedObjectContext)
-        
-        // Identificamos el book
-        let item = bookList?[indexPath.row].book
-*/
         
         // Celda personalizada
         let cell = tableView.dequeueReusableCell(withIdentifier: BookTableViewCell.cellID, for: indexPath) as! BookTableViewCell
 
-        var booktag : BookTag
-        var item : Book
-       
-        
-        if  self.searchController.isActive && self.searchController.searchBar.text != "" {
-            print(self.searchController.isActive)
-            print(self.searchController.searchBar.text)
-            //es busqueda, asi que el filter es un array de Book
-            item = self.filteredBooks[indexPath.row] as Book
-        }
-        else {
-            booktag = self.fetchedResultsController?.object(at: indexPath) as! BookTag
-            item = booktag.book!
-        }
+        let booktag = self.fetchedResultsController?.object(at: indexPath) as! BookTag
+        let item = booktag.book
         
         // Sincronizar book -> celda
-        cell.titleView.text = item.title
-        cell.authorsView.text = item.listOfAuthors()
-        cell.tagsView.text = item.listOfTags()
+        cell.titleView.text = item?.title
+        cell.authorsView.text = item?.listOfAuthors()
+        cell.tagsView.text = item?.listOfTags()
         
         UIView.transition(with: cell.coverView,
                           duration: 0.3,
                           options: [.curveEaseOut],
-                          animations: { cell.coverView.image = self.getCover(ofBook: item)},
+                          animations: { cell.coverView.image = self.getCover(ofBook: item!)},
                           completion: nil)
 
         // Mostrar condición de favorito en las listas
@@ -110,7 +84,6 @@ extension LibraryTableViewController{
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
-
     
     //MARK: - Cell registration
     private func registerNib(){
@@ -121,34 +94,11 @@ extension LibraryTableViewController{
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BookTableViewCell.cellHeight
     }
-
-/*
-    //MARK: - Data Source
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        let tagCount = Tag.count(fetchedResultsController?.managedObjectContext)
-        return tagCount
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let tagList = Tag.allTags(fetchedResultsController?.managedObjectContext)
-        return tagList?[section].tagName?.capitalized
-        
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Get the tag
-        let tagList = Tag.allTags(fetchedResultsController?.managedObjectContext)
-        let theTag = tagList?[section]
-        
-        // Obtain number of rows in section
-        let bookTagList = BookTag.booksForTag(theTag: theTag!, inContext: fetchedResultsController?.managedObjectContext)
-        return (bookTagList?.count)!
-    }
-*/
     
 
     //MARK: - Search Controller Methods
-    func filterContentForSearchText(searchText: String, scope: String = "All") {
+/*
+    func filterContentForSearchText(searchText: String, scope: String) {
 
         self.filteredBooks.removeAll()
         
@@ -163,17 +113,18 @@ extension LibraryTableViewController{
                     self.filteredBooks.append(contentsOf: booksByTag)
                 }
             break
-//        case "Autor":
-//            if let booksByAuthor = Author.filterByAuthor(author: searchText, inContext: (self.model?.context)!) {
-//            }
-//            break
+        case "Autor":
+            if let booksByAuthor = Author.filterByAuthor(author: searchText, inContext: (self.model?.context)!) {
+            }
+            break
         default:
             break
         }
 
         self.tableView.reloadData()
     }
-
+*/
+    
 }
     //MARK: - Utils
     extension LibraryTableViewController {
@@ -246,15 +197,31 @@ extension LibraryTableViewController{
 
 extension LibraryTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController){
-        filterContentForSearchText(searchText: searchController.searchBar.text!)
         
-        let scope = self.searchController.searchBar.scopeButtonTitles![searchController.searchBar.selectedScopeButtonIndex]
-        filterContentForSearchText(searchText: searchController.searchBar.text!, scope: scope)
+//        let scope = self.searchController.searchBar.scopeButtonTitles![searchController.searchBar.selectedScopeButtonIndex]
+//        filterContentForSearchText(searchText: searchController.searchBar.text!, scope: scope)
+        
+        // Hay que cambiar el fetch request
+        let busqueda = searchController.searchBar.text
+        
+        let fr = NSFetchRequest<BookTag>(entityName: BookTag.entityName)
+        fr.fetchBatchSize = 50
+        fr.sortDescriptors = [NSSortDescriptor(key: "tag.tagName",ascending: true),
+                              NSSortDescriptor(key: "book",ascending: true)]
+        if (busqueda! != ""){
+            fr.predicate = NSPredicate(format: "book.title CONTAINS [cd] %@", busqueda!)
+        }
+        
+        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: (model?.context)!, sectionNameKeyPath: "tag.tagName", cacheName: nil)
+        self.fetchedResultsController? = fc as!
+            NSFetchedResultsController<NSFetchRequestResult>
+        self.tableView.reloadData()
+        
     }
 }
 
 extension LibraryTableViewController: UISearchBarDelegate {
     private func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        filterContentForSearchText(searchText: searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+//        filterContentForSearchText(searchText: searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
 }

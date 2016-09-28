@@ -33,28 +33,6 @@ public class Tag: NSManagedObject {
         
     }
     
- 
-    class func filterByTag(tag t: String, inContext context: NSManagedObjectContext) -> [Book]? {
-      
-        let query = NSFetchRequest<Tag>(entityName: Tag.entityName)
-        
-        //array de NSSortDescriptors, busco toos los tags que coincidan con lo seleccionado
-        query.sortDescriptors = [NSSortDescriptor(key: "proxyForSorting", ascending: true)]
-        query.predicate = NSPredicate(format: "tag CONTAINS [cd] %@", t)
-        
-        do {
-            let res = try context.fetch(query) as [Tag]
-            return nil
-            
-        } catch {
-            return nil
-        }
-        
-    }
-    
-    
-    
-    
 }
 
 //MARK: - Static class
