@@ -60,7 +60,7 @@ public class Book: NSManagedObject {
     func listOfTags() -> String? {
         if let tags = self.bookTags?.allObjects as? [BookTag] {
             let arrayOfTags = tags.map({$0.tag!})
-            let arrayOfTagName = arrayOfTags.map({$0.tagName!})
+            let arrayOfTagName = arrayOfTags.map({$0.tagName!}).sorted()
             return arrayOfTagName.joined(separator: ", ")
         }
         return nil
@@ -84,6 +84,41 @@ extension Book{
             return false;
         }
         
+    }
+}
+
+//MARK: -- Favorite management
+extension Book{
+    func favoriteSwitch(){
+        if (self.isFavorite == false){
+            // Mark favorite the model
+            self.isFavorite = true
+            // Create a "favorite" tag
+            
+            var favTag = Tag.tagForString("favorites", inContext: self.managedObjectContext)
+            if (favTag==nil){
+                // No existe el tag hay que crearlo
+                favTag = Tag(tag: "favorites", inContext: self.managedObjectContext!)
+            }
+            // Associate Book
+            _ = BookTag(theBook: self,
+                        theTag: favTag!,
+                        inContext: self.managedObjectContext!)
+            
+            //try! self.managedObjectContext?.save()
+            
+            
+        }else{
+            self.isFavorite=false
+            
+            let theBookTag = BookTag.favoriteBookTag(ofBook: self,inContext: self.managedObjectContext)
+            
+            self.managedObjectContext?.delete(theBookTag!)
+            
+            //try! self.managedObjectContext?.save()
+            
+            
+        }
     }
 }
 

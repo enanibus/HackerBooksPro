@@ -76,6 +76,13 @@ extension LibraryTableViewController{
         
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let bookTag = fetchedResultsController?.object(at: indexPath) as! BookTag
+        let book = bookTag.book!
+        let bookVC = BookViewController(model: book)
+        navigationController?.pushViewController(bookVC, animated: true)
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -131,7 +138,7 @@ extension LibraryTableViewController{
         func getCover(ofBook item:Book)->UIImage{
             
             let mainBundle = Bundle.main
-            let defaultImageUrl = mainBundle.url(forResource: "emptyBookCover", withExtension: "png")!
+            let defaultImageUrl = mainBundle.url(forResource: "PlaceholderBook", withExtension: "png")!
             let data = try! Data(contentsOf: defaultImageUrl)
             let img = UIImage(data: data as Data)!
             
@@ -163,7 +170,7 @@ extension LibraryTableViewController{
         func downloadCover(ofBook book:Book)->UIImage{
             if (book.cover?.photoData==nil){
                 let mainBundle = Bundle.main
-                let defaultImage = mainBundle.url(forResource: "emptyBookCover", withExtension: "png")!
+                let defaultImage = mainBundle.url(forResource: "PlaceholderBook", withExtension: "png")!
                 
                 // AsyncData
                 let theDefaultData = try! Data(contentsOf: defaultImage)

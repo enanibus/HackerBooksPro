@@ -69,7 +69,7 @@ func decode(book dict: JSONDictionary) throws -> Book{
     
     let mainBundle = Bundle.main
     
-    let defaultImage = mainBundle.url(forResource: "emptyBookCover", withExtension: "png")!
+    let defaultImage = mainBundle.url(forResource: "PlaceholderBook", withExtension: "png")!
     let defaultPdf = mainBundle.url(forResource: "emptyPdf", withExtension: "pdf")!
     
     // AsyncData
