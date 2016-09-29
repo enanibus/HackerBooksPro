@@ -67,12 +67,12 @@ extension LibraryTableViewController{
                           completion: nil)
 
         // Mostrar condición de favorito en las listas
-//        if item.isFavorite {
-//            cell.isFavorite.setTitle("🌟", forState: .Normal)
-//        }
-//        else{
-//            cell.isFavorite.setTitle("", forState: .Normal)
-//        }
+        if (item?.isFavorite == true){
+            cell.isFavorite.setTitle("🌟", for: .normal)
+        }
+        else{
+            cell.isFavorite.setTitle("", for: .normal)
+        }
         
         return cell
     }
@@ -86,6 +86,10 @@ extension LibraryTableViewController{
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if IS_IPHONE {
+            self.tableView.reloadData()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -232,3 +236,5 @@ extension LibraryTableViewController: UISearchBarDelegate {
 //        filterContentForSearchText(searchText: searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
 }
+
+

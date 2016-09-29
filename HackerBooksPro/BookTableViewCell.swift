@@ -19,6 +19,8 @@ class BookTableViewCell: UITableViewCell {
     @IBOutlet weak var authorsView: UILabel!
     @IBOutlet weak var tagsView: UILabel!
     
+    @IBOutlet weak var isFavorite: UIButton!
+    
     var coverImage : UIImage? {
         didSet {
             self.coverView.image = coverImage

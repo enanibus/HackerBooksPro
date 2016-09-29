@@ -15,6 +15,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let model = CoreDataStack(modelName: "HackerBooksPro", inMemory: false)!
 
+/*
+    func rootViewControllerForPhone(withModel model: CoreDataStack) -> UIViewController{
+        
+        // Crear un Library VC de Favoritos
+        let libVC = LibraryTableViewController(withModel: self.model, style: .plain)
+        
+        // Se mete Library VC en un Library Nav
+        let libNav = UINavigationController(rootViewController: libVC)
+        
+        // Asignar delegados
+        libVC.delegate = libVC
+        
+        return libNav
+        
+    }
+    
+    func rootViewControllerForPad(withModel model: CoreDataStack) -> UIViewController {
+        
+        // Crear un Library VC de Favoritos
+        let libVC = LibraryTableViewController(withModel: self.model, style: .plain)
+        
+        // Se mete Library VC en un Library Nav
+        let libNav = UINavigationController(rootViewController: libVC)
+        
+        // Crear un Book VC
+        let bookVC = BookViewController(model: model.context)
+        
+        // Se mete BookVC en un Book Nav
+        let bookNav = UINavigationController(rootViewController: bookVC)
+        
+        // Crear el Split View Controller
+        let splitVC = UISplitViewController()
+        splitVC.viewControllers = [libNav, bookNav]
+        
+        //poner el split como VC
+        window?.rootViewController = splitVC
+        
+        // Asignar delegados
+        libVC.delegate = bookVC
+        
+        return splitVC
+    }
+*/
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
     
@@ -98,6 +142,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let nVC = LibraryTableViewController(fetchedResultsController: fc as! NSFetchedResultsController<NSFetchRequestResult>, style: .plain)
         
+//        if (!(IS_IPHONE)) {
+//            // Tableta
+//            rootVC = self.rootViewControllerForPad(withModel: model)
+//        } else {
+//            rootVC = self.rootViewControllerForPhone(withModel: model)
+//        }
+        
         // Creamos el navegador
         let navVC = UINavigationController(rootViewController: nVC)
  
@@ -106,10 +157,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = navVC
         window?.makeKeyAndVisible()
 
-        
-        
-        
-        
         
         return true
     }
