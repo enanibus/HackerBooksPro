@@ -68,7 +68,7 @@ class BookViewController: UIViewController {
     @IBAction func markAsFavorite(_ sender: AnyObject) {
         
         // Provoca notificacion de cambio favorito/no favorito
-        self.model.favoriteSwitch()
+        self.model.markUnmarkAsFavorite()
 
         // Refresca los datos
          syncModelWithView()

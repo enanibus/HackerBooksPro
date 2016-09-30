@@ -13,8 +13,7 @@ class LibraryTableViewController: CoreDataTableViewController, UISearchControlle
     
     let model = CoreDataStack(modelName: "HackerBooksPro", inMemory: false)
     let searchController = UISearchController(searchResultsController: nil)
-    var filteredBooks = [Book]()
-
+    
 }
 
 extension LibraryTableViewController{
@@ -27,14 +26,10 @@ extension LibraryTableViewController{
         self.searchController.searchResultsUpdater = self
         self.searchController.dimsBackgroundDuringPresentation = false
         self.searchController.definesPresentationContext = true
-        
         self.searchController.searchBar.sizeToFit()
         self.searchController.hidesNavigationBarDuringPresentation = false
-//        self.searchController.searchBar.scopeButtonTitles = ["Titulo", "Tag", "Autor"]
         self.searchController.searchBar.delegate = self
         self.tableView.tableHeaderView = searchController.searchBar
-
-        self.filteredBooks = [Book]()
         
         // Fetch request por BookTag
         let fr = NSFetchRequest<BookTag>(entityName: BookTag.entityName)
@@ -105,36 +100,6 @@ extension LibraryTableViewController{
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BookTableViewCell.cellHeight
     }
-    
-
-    //MARK: - Search Controller Methods
-/*
-    func filterContentForSearchText(searchText: String, scope: String) {
-
-        self.filteredBooks.removeAll()
-        
-        switch (scope){
-            case "Titulo":
-                if let booksByTitle = Book.filterByTitle(title: searchText, inContext: (self.model?.context)!) {
-                    self.filteredBooks.append(contentsOf: booksByTitle)
-                }
-            break
-        case "Tag":
-                if let booksByTag = Tag.filterByTag(tag: searchText, inContext: (self.model?.context)!) {
-                    self.filteredBooks.append(contentsOf: booksByTag)
-                }
-            break
-        case "Autor":
-            if let booksByAuthor = Author.filterByAuthor(author: searchText, inContext: (self.model?.context)!) {
-            }
-            break
-        default:
-            break
-        }
-
-        self.tableView.reloadData()
-    }
-*/
     
 }
     //MARK: - Utils
@@ -209,18 +174,21 @@ extension LibraryTableViewController{
 extension LibraryTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController){
         
-//        let scope = self.searchController.searchBar.scopeButtonTitles![searchController.searchBar.selectedScopeButtonIndex]
-//        filterContentForSearchText(searchText: searchController.searchBar.text!, scope: scope)
-        
         // Hay que cambiar el fetch request
-        let busqueda = searchController.searchBar.text
+        let search = searchController.searchBar.text
         
         let fr = NSFetchRequest<BookTag>(entityName: BookTag.entityName)
         fr.fetchBatchSize = 50
         fr.sortDescriptors = [NSSortDescriptor(key: "tag.tagName",ascending: true),
                               NSSortDescriptor(key: "book",ascending: true)]
-        if (busqueda! != ""){
-            fr.predicate = NSPredicate(format: "book.title CONTAINS [cd] %@", busqueda!)
+        if (search! != ""){
+            let bookPredicate = NSPredicate(format: "book.title CONTAINS [cd] %@",search!)
+            let tagPredicate = NSPredicate(format: "tag.tagName CONTAINS [cd] %@",search!)
+            let tagAuthor = NSPredicate(format: "book.authors.name CONTAINS [cd] %@",search!)
+            
+            let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [bookPredicate,tagPredicate,tagAuthor])
+            
+            fr.predicate = predicate
         }
         
         let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: (model?.context)!, sectionNameKeyPath: "tag.tagName", cacheName: nil)
@@ -233,7 +201,6 @@ extension LibraryTableViewController: UISearchResultsUpdating {
 
 extension LibraryTableViewController: UISearchBarDelegate {
     private func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-//        filterContentForSearchText(searchText: searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
 }
 

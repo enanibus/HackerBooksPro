@@ -31,22 +31,6 @@ public class Book: NSManagedObject {
         }
     }
     
-    class func filterByTitle(title t: String, inContext context: NSManagedObjectContext) -> [Book]? {
-        
-        let query = NSFetchRequest<Book>(entityName: Book.entityName)
-        
-        query.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-        query.predicate = NSPredicate(format: "title CONTAINS [cd] %@", t)
-        
-        do {
-            let res = try context.fetch(query) as [Book]
-            return res
-            
-        } catch {
-            return nil
-        }
-    }
-    
     //MARK: - Utils
     
     func listOfAuthors() -> String? {
@@ -89,7 +73,7 @@ extension Book{
 
 //MARK: -- Favorite management
 extension Book{
-    func favoriteSwitch(){
+    func markUnmarkAsFavorite(){
         if (self.isFavorite == false){
             // Mark favorite the model
             self.isFavorite = true
