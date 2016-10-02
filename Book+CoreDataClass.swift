@@ -55,16 +55,16 @@ public class Book: NSManagedObject {
         return NSKeyedArchiver.archivedData(withRootObject: uri) as NSData?
     }
     
-    class func bookWithID(id: NSManagedObjectID, context: NSManagedObjectContext) throws -> Book {
-
-        do {
-            let object = try context.existingObject(with: id)
-            return object as! Book
-        } catch {
-            throw HackerBooksError.idObjectError
-        }
-        
-    }
+//    class func getIdBook(id: NSManagedObjectID, context: NSManagedObjectContext) throws -> Book {
+//
+//        do {
+//            let object = try context.existingObject(with: id)
+//            return object as! Book
+//        } catch {
+//            throw HackerBooksError.idObjectError
+//        }
+//        
+//    }
     
 }
 
@@ -124,7 +124,6 @@ extension Book{
 
 //MARK: - KVO
 extension Book{
-    //@nonobjc static let observableKeys = ["text","photo.photoData"]
     static func observableKeys() -> [String] {return ["isFavorite"]};
     func setupKVO(){
         // alta en las notificaciones

@@ -80,6 +80,19 @@ extension LibraryTableViewController{
         let bookTag = fetchedResultsController?.object(at: indexPath) as! BookTag
         let book = bookTag.book!
         let bookVC = BookViewController(model: book)
+        
+        if (IS_IPHONE) {
+            navigationController?.pushViewController(bookVC, animated: true)
+        }
+        else{
+            delegate?.libraryTableViewController(vc: self, didSelectBook: book)
+        }
+        
+    }
+    
+    func libraryTableViewController(viewController: LibraryTableViewController, didSelectBook book: Book) {
+        
+        let bookVC = BookViewController(model: book)
         navigationController?.pushViewController(bookVC, animated: true)
     }
 
@@ -88,10 +101,6 @@ extension LibraryTableViewController{
         
         if (!IS_IPHONE) {
         self.clearsSelectionOnViewWillAppear = (self.splitViewController?.isCollapsed)!
-        }
-        
-        if IS_IPHONE {
-            self.tableView.reloadData()
         }
     }
     
@@ -181,6 +190,29 @@ extension LibraryTableViewController{
             }
         }
         
+        
+        func getIdBook(id: NSManagedObjectID, inContext context: NSManagedObjectContext) throws -> Book {
+            
+            do {
+                let object = try context.existingObject(with: id)
+                return object as! Book
+            } catch {
+                throw HackerBooksError.idObjectError
+            }
+            
+        }
+        
+        func getBookFromDefaults() -> Book? {
+
+            if let uriDefault = defaults.object(forKey: LAST_BOOK) ,
+                let uri = NSKeyedUnarchiver.unarchiveObject(with: (uriDefault as! NSData) as Data),
+                let uriId = model?.context.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: (uri as! NSURL) as URL){
+                if let book = try? getIdBook(id: uriId, inContext: (model?.context)!) {
+                    return book
+                }
+            }
+            return nil
+        }
 }
 
 extension LibraryTableViewController: UISearchResultsUpdating {

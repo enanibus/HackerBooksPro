@@ -13,11 +13,9 @@ enum Directories{
     case Cache
 }
 
-let defaults = UserDefaults.standard
-
-func saveLastBookReadInUserDefaults(book: Book) {
+func saveBookInDefaults(book: Book) {
     if let data = archiveURIRepresentation(book: book) {
-        defaults.set(data, forKey: LAST_BOOK_READ)
+        defaults.set(data, forKey: LAST_BOOK)
     }
 }
 

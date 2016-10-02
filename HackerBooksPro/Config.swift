@@ -15,7 +15,7 @@ public let FAVORITES                            =   "favorites"
 public let JSON_LIBRARY_FILE                    =   "books_readable.json"
 public let COVER_FILE                           =   "PlaceholderBook.png"
 public let JSON_DOWNLOADED                      =   "jsonDownloadedInDocuments"
-public let LAST_BOOK_READ                       =   "lastBookRead"
+public let LAST_BOOK                            =   "lastBook"
 public let BOOK_KEY                             =   "BookKey"
 public let IMAGE_KEY                            =   "ImageKey"
 public let BOOK_DID_CHANGE_NOTIFICATION         =   "Selected Book did change"
@@ -29,3 +29,4 @@ public let ORDER_BY_TAG                         =   0
 public let ORDER_BY_TITLE                       =   1
 public let LITERAL_SECTION_ORDER_BY_TITLE       =   "Books by Title"
 public let IS_IPHONE = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone
+public let defaults                             =   UserDefaults.standard

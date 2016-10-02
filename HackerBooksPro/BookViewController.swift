@@ -103,9 +103,6 @@ class BookViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Sincronizar vista y modelo
-        if let b = loadBookFromDefaults(book: self.model) {
-            self.model = b
-        }
         syncModelWithView()
         
     }
@@ -120,22 +117,6 @@ class BookViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-    }
-    
-    func loadBookFromDefaults(book: Book?) -> Book? {
-        guard (book == nil) else {
-            return nil
-        }
-        
-        if let uriDefault = defaults.object(forKey: BOOK_SAVED) ,
-            let uri = NSKeyedUnarchiver.unarchiveObject(with: (uriDefault as! NSData) as Data),
-            let uriId = self.stack?.context.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: (uri as! NSURL) as URL){
-            
-            if let b = try? Book.bookWithID(id: uriId, context: (self.stack?.context)!) {
-                return b
-            }
-        }
-        return nil
     }
 
 }

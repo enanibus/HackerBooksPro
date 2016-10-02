@@ -76,7 +76,6 @@ func downloadFromURL() throws -> NSData{
 }
 
 func isJSONDownloaded() -> Bool{
-    let defaults = UserDefaults.standard
     let isDownloaded = defaults.object(forKey: JSON_DOWNLOADED) as? String
     if isDownloaded == JSON_DOWNLOADED{
         return true
@@ -85,7 +84,6 @@ func isJSONDownloaded() -> Bool{
 }
 
 func setIsJSONDownloaded(){
-    let defaults = UserDefaults.standard
     defaults.set(JSON_DOWNLOADED, forKey: JSON_DOWNLOADED)
     defaults.synchronize()
 }
