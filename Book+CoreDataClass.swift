@@ -50,6 +50,22 @@ public class Book: NSManagedObject {
         return nil
     }
     
+    func archiveURIRepresentation() -> NSData? {
+        let uri = self.objectID.uriRepresentation()
+        return NSKeyedArchiver.archivedData(withRootObject: uri) as NSData?
+    }
+    
+    class func bookWithID(id: NSManagedObjectID, context: NSManagedObjectContext) throws -> Book {
+
+        do {
+            let object = try context.existingObject(with: id)
+            return object as! Book
+        } catch {
+            throw HackerBooksError.idObjectError
+        }
+        
+    }
+    
 }
 
 extension Book{
@@ -105,4 +121,38 @@ extension Book{
         }
     }
 }
+
+//MARK: - KVO
+extension Book{
+    //@nonobjc static let observableKeys = ["text","photo.photoData"]
+    static func observableKeys() -> [String] {return ["isFavorite"]};
+    func setupKVO(){
+        // alta en las notificaciones
+        // para algunas propiedades
+        // Deberes: Usar una la funcion map
+        for key in Book.observableKeys(){
+            self.addObserver(self,
+                             forKeyPath: key,
+                             options: [],
+                             context: nil)
+        }
+    }
+    
+    func tearDownKVO(){
+        // Baja en todas las notificaciones
+        for key in Book.observableKeys(){
+            self.removeObserver(self, forKeyPath: key)
+        }
+    }
+    
+    public override func observeValue(forKeyPath keyPath: String?,
+                                      of object: Any?,
+                                      change: [NSKeyValueChangeKey : Any]?,
+                                      context: UnsafeMutableRawPointer?) {
+        
+        self.markUnmarkAsFavorite()
+    }
+    
+}
+
 

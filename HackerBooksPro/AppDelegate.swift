@@ -13,13 +13,24 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let model = CoreDataStack(modelName: "HackerBooksPro", inMemory: false)!
+    let model = CoreDataStack(modelName: DATABASE, inMemory: false)!
+    let defaults = UserDefaults.standard
 
-/*
+
     func rootViewControllerForPhone(withModel model: CoreDataStack) -> UIViewController{
         
+        
+        let fr = NSFetchRequest<Book>(entityName: Book.entityName)
+        fr.fetchBatchSize = 50
+        fr.sortDescriptors = [NSSortDescriptor(key: "title",ascending: true)]
+        
+        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: model.context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        // Create LibraryTableViewController
+        let libVC = LibraryTableViewController(fetchedResultsController: fc as! NSFetchedResultsController<NSFetchRequestResult>, style: .plain)
+        
         // Crear un Library VC de Favoritos
-        let libVC = LibraryTableViewController(withModel: self.model, style: .plain)
+//        let libVC = LibraryTableViewController(withModel: self.model, style: .plain)
         
         // Se mete Library VC en un Library Nav
         let libNav = UINavigationController(rootViewController: libVC)
@@ -33,14 +44,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func rootViewControllerForPad(withModel model: CoreDataStack) -> UIViewController {
         
+        let fr = NSFetchRequest<Book>(entityName: Book.entityName)
+        fr.fetchBatchSize = 50
+        fr.sortDescriptors = [NSSortDescriptor(key: "title",ascending: true)]
+        
+        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: model.context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        // Create LibraryTableViewController
+        let libVC = LibraryTableViewController(fetchedResultsController: fc as! NSFetchedResultsController<NSFetchRequestResult>, style: .plain)
+        
         // Crear un Library VC de Favoritos
-        let libVC = LibraryTableViewController(withModel: self.model, style: .plain)
+//        let libVC = LibraryTableViewController(withModel: self.model, style: .plain)
         
         // Se mete Library VC en un Library Nav
         let libNav = UINavigationController(rootViewController: libVC)
         
         // Crear un Book VC
-        let bookVC = BookViewController(model: model.context)
+        let book = Book(title: "Book", imgURL: "", pdfURL: "", inContext: model.context)
+        let bookVC = BookViewController(model: book)
         
         // Se mete BookVC en un Book Nav
         let bookNav = UINavigationController(rootViewController: bookVC)
@@ -57,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return splitVC
     }
-*/
+
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
@@ -65,7 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])
         
         // Clean up all local caches
-        AsyncData.removeAllLocalFiles()
+//        AsyncData.removeAllLocalFiles()
         
         // Create the window
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -120,6 +141,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         }
                         // Add the relation between author and book
                         theAuthor?.addToBooks(oneBook)
+                        // Save to defaults
+                        saveIdObjectInDefaults(withModel: oneBook)
                     }
                 }catch{
                     fatalError("Error while loading model")
@@ -132,29 +155,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    }
         // Fetch request
 
-        let fr = NSFetchRequest<Book>(entityName: Book.entityName)
-        fr.fetchBatchSize = 50
-        fr.sortDescriptors = [NSSortDescriptor(key: "title",ascending: true)]
-        
-        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: model.context, sectionNameKeyPath: nil, cacheName: nil)
+//        let fr = NSFetchRequest<Book>(entityName: Book.entityName)
+//        fr.fetchBatchSize = 50
+//        fr.sortDescriptors = [NSSortDescriptor(key: "title",ascending: true)]
+//        
+//        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: model.context, sectionNameKeyPath: nil, cacheName: nil)
         
         // Create LibraryTableViewController
         
-        let nVC = LibraryTableViewController(fetchedResultsController: fc as! NSFetchedResultsController<NSFetchRequestResult>, style: .plain)
+//        let nVC = LibraryTableViewController(fetchedResultsController: fc as! NSFetchedResultsController<NSFetchRequestResult>, style: .plain)
         
-//        if (!(IS_IPHONE)) {
-//            // Tableta
-//            rootVC = self.rootViewControllerForPad(withModel: model)
-//        } else {
-//            rootVC = self.rootViewControllerForPhone(withModel: model)
+        // iPhone - iPad
+//        if (IS_IPHONE) {
+//            libNav = UINavigationController(rootViewController: nVC)
+//        }
+//        else {
+//            libNav = UINavigationController(rootViewController: nVC)
 //        }
         
+        var rootVC = UIViewController()
+        
+        if (!(IS_IPHONE)) {
+            // Tableta
+            rootVC = self.rootViewControllerForPad(withModel: model)
+        } else {
+            rootVC = self.rootViewControllerForPhone(withModel: model)
+        }
+        
+        self.window?.rootViewController = rootVC
+        
+        
+        
+        
+        
+        
+        
+        
         // Creamos el navegador
-        let navVC = UINavigationController(rootViewController: nVC)
+//        let navVC = UINavigationController(rootViewController: nVC)
  
         // La window
 //        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = navVC
+//        window?.rootViewController = libNav
         window?.makeKeyAndVisible()
 
         

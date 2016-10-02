@@ -9,10 +9,14 @@
 import UIKit
 import CoreData
 
-class LibraryTableViewController: CoreDataTableViewController, UISearchControllerDelegate {
+class LibraryTableViewController: CoreDataTableViewController, UISearchControllerDelegate, LibraryTableViewControllerDelegate {
+    internal func libraryTableViewController(vc: LibraryTableViewController, didSelectBook book: Book) {
+    }
+
     
-    let model = CoreDataStack(modelName: "HackerBooksPro", inMemory: false)
+    let model = CoreDataStack(modelName: DATABASE, inMemory: false)
     let searchController = UISearchController(searchResultsController: nil)
+    var delegate : LibraryTableViewControllerDelegate?
     
 }
 
@@ -82,6 +86,10 @@ extension LibraryTableViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if (!IS_IPHONE) {
+        self.clearsSelectionOnViewWillAppear = (self.splitViewController?.isCollapsed)!
+        }
+        
         if IS_IPHONE {
             self.tableView.reloadData()
         }
@@ -89,6 +97,10 @@ extension LibraryTableViewController{
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        if searchController.isActive {
+            searchController.isActive = false
+        }
+        _ = try? self.model?.context.save()
     }
     
     //MARK: - Cell registration
@@ -202,6 +214,12 @@ extension LibraryTableViewController: UISearchResultsUpdating {
 extension LibraryTableViewController: UISearchBarDelegate {
     private func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
     }
+}
+
+//MARK: - Delegate
+protocol LibraryTableViewControllerDelegate {
+    
+    func libraryTableViewController(vc : LibraryTableViewController, didSelectBook book: Book)
 }
 
 

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+public let DATABASE                             =   "HackerBooksPro"
 public let REMOTE_LIBRARY_URL                   =   "https://t.co/K9ziV0z3SJ"
 public let FAVORITES                            =   "favorites"
 public let JSON_LIBRARY_FILE                    =   "books_readable.json"
@@ -23,6 +24,7 @@ public let FAVORITES_DID_CHANGE_NOTIFICATION    =   "Favorites did change"
 public let IMAGE_DID_CHANGE_NOTIFICATION        =   "Image did change"
 public let TAG                                  =   "Tag"
 public let TITLE                                =   "Title"
+public let BOOK_SAVED                           =   "BookSaved"
 public let ORDER_BY_TAG                         =   0
 public let ORDER_BY_TITLE                       =   1
 public let LITERAL_SECTION_ORDER_BY_TITLE       =   "Books by Title"

@@ -18,4 +18,5 @@ enum HackerBooksError : Error{
     case nilJSONObject
     case urlNotFoundError
     case jsonSavingFileError
+    case idObjectError
 }
