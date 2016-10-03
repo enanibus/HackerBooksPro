@@ -132,11 +132,6 @@ func getJSONFromDocuments() throws -> NSData{
     return data
 }
 
-func saveIdObjectInDefaults(withModel model: Book) {
-    if let data = model.archiveURIRepresentation() {
-        defaults.set(data, forKey: BOOK_SAVED)
-    }
-}
 
 
 

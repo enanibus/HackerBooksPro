@@ -13,6 +13,8 @@ import UIKit
 public class Book: NSManagedObject {
     static let entityName = "Book"
     
+    let model = CoreDataStack(modelName: DATABASE, inMemory: false)
+    
     //MARK: - Initializers
     
     convenience init (title: String, imgURL: String, pdfURL: String, inContext context: NSManagedObjectContext){
@@ -55,17 +57,6 @@ public class Book: NSManagedObject {
         return NSKeyedArchiver.archivedData(withRootObject: uri) as NSData?
     }
     
-//    class func getIdBook(id: NSManagedObjectID, context: NSManagedObjectContext) throws -> Book {
-//
-//        do {
-//            let object = try context.existingObject(with: id)
-//            return object as! Book
-//        } catch {
-//            throw HackerBooksError.idObjectError
-//        }
-//        
-//    }
-    
 }
 
 extension Book{
@@ -105,7 +96,8 @@ extension Book{
                         theTag: favTag!,
                         inContext: self.managedObjectContext!)
             
-            try! self.managedObjectContext?.save()
+//            try! self.managedObjectContext?.save()
+            model?.save()
             
             
         }else{
@@ -115,7 +107,8 @@ extension Book{
             
             self.managedObjectContext?.delete(theBookTag!)
             
-            try! self.managedObjectContext?.save()
+//            try! self.managedObjectContext?.save()
+            model?.save()
             
             
         }

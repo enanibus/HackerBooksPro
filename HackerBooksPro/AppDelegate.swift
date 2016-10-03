@@ -199,7 +199,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        window?.rootViewController = libNav
         window?.makeKeyAndVisible()
 
-        
+        model.autoSave(5)
         return true
     }
 

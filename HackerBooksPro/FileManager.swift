@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 enum Directories{
     case Documents
@@ -115,3 +116,30 @@ func saveResourceToCache(withUrl url: NSURL, andData data: NSData) throws {
 
 
 //MARK: - Utils
+
+func saveIdObjectInDefaults(withModel model: Book){
+    let uri = model.objectID.uriRepresentation()
+    let deb = uri.absoluteString
+    defaults.set(deb,forKey: LAST_BOOK)
+}
+
+func getIdObjectFromDefaults(inContext context : NSManagedObjectContext?)->Book?{
+    
+    
+    let myObjectUrl = NSURL(string: UserDefaults.standard.value(forKey: LAST_BOOK) as! String)
+    if (myObjectUrl == nil){
+        return nil
+    }
+    let myObjectId = context?.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: myObjectUrl as! URL)
+    if (myObjectId == nil){
+        return nil
+    }
+    do{
+        let myObject = try context?.existingObject(with: myObjectId!)
+        let theBook = myObject as? Book
+        return theBook
+    }
+    catch{
+        return nil
+    }
+}

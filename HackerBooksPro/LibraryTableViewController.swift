@@ -223,8 +223,8 @@ extension LibraryTableViewController: UISearchResultsUpdating {
         
         let fr = NSFetchRequest<BookTag>(entityName: BookTag.entityName)
         fr.fetchBatchSize = 50
-        fr.sortDescriptors = [NSSortDescriptor(key: "tag.tagName",ascending: true),
-                              NSSortDescriptor(key: "book",ascending: true)]
+        fr.sortDescriptors = [NSSortDescriptor(key: "tag.proxyForSorting",ascending: true),
+                              NSSortDescriptor(key: "book.title",ascending: true)]
         if (search! != ""){
             let bookPredicate = NSPredicate(format: "book.title CONTAINS [cd] %@",search!)
             let tagPredicate = NSPredicate(format: "tag.tagName CONTAINS [cd] %@",search!)
