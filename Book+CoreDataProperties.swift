@@ -2,12 +2,13 @@
 //  Book+CoreDataProperties.swift
 //  HackerBooksPro
 //
-//  Created by Jacobo Enriquez Gabeiras on 24/9/16.
+//  Created by Jacobo Enriquez Gabeiras on 3/10/16.
 //  Copyright © 2016 enanibus. All rights reserved.
 //
 
 import Foundation
 import CoreData
+import 
 
 extension Book {
 
@@ -16,7 +17,7 @@ extension Book {
     }
 
     @NSManaged public var imageURL: String?
-    @NSManaged public var isFavorite: NSNumber?
+    @NSManaged public var isFavorite: Bool
     @NSManaged public var pdfURL: String?
     @NSManaged public var title: String?
     @NSManaged public var annotations: NSSet?
