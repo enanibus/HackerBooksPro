@@ -22,7 +22,7 @@ class BookViewController: UIViewController {
     var model : Book{
         didSet {
             self.syncModelWithView()
-            saveIdObjectInDefaults(withModel: model)
+            saveBookInDefaults(withModel: model)
         }
     }
 

@@ -103,15 +103,15 @@ func saveResourceToCache(withUrl url: NSURL, andData data: NSData) throws {
 
 
 
-//MARK: - Utils
+//MARK: - Utils for LAST_BOOK
 
-func saveIdObjectInDefaults(withModel model: Book){
+func saveBookInDefaults(withModel model: Book){
     let uri = model.objectID.uriRepresentation()
     let deb = uri.absoluteString
     defaults.set(deb,forKey: LAST_BOOK)
 }
 
-func getIdObjectFromDefaults(inContext context : NSManagedObjectContext?)->Book?{
+func getBookFromDefaults(inContext context : NSManagedObjectContext?)->Book?{
     
     
     let myObjectUrl = NSURL(string: UserDefaults.standard.value(forKey: LAST_BOOK) as! String)
@@ -132,14 +132,4 @@ func getIdObjectFromDefaults(inContext context : NSManagedObjectContext?)->Book?
     }
 }
 
-func saveBookInDefaults(book: Book) {
-    if let data = archiveURIRepresentation(book: book) {
-        defaults.set(data, forKey: LAST_BOOK)
-    }
-}
-
-func archiveURIRepresentation(book: Book) -> NSData? {
-    let uri = book.objectID.uriRepresentation()
-    return NSKeyedArchiver.archivedData(withRootObject: uri) as NSData?
-}
 

@@ -32,7 +32,7 @@ class AsyncImage{
         
         do{
             let dataOfImage = try loadResourceFromCache(withUrl: self.imageURL)
-            guard let uiImg = UIImage(data: dataOfImage) else{
+            guard let uiImg = UIImage(data: dataOfImage as Data) else{
                 return nil
             }
             self.image = uiImg
@@ -42,40 +42,40 @@ class AsyncImage{
     
         // 3. Imagen de URL remota con GCD en background
         
-            downloadImageInBackground()
+//            downloadImageInBackground()
             
             return self.image
         }
     }
     
-    func downloadImageInBackground(){
-        let download = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0)
-        let bloque : dispatch_block_t = {
-            do{
-                let dataOfImage = try loadResourceFromUrl(withUrl: self.imageURL)
-                try saveResourceToCache(withUrl: self.imageURL, andData: dataOfImage)
-                guard let uiImg = UIImage(data: dataOfImage) else {
-                    self.image = UIImage(imageLiteral: COVER_FILE)
-                    return
-                }
-                self.image = uiImg
-                
-                // notificar de la descarga a suscriptores
-                self.notifyAsyncImageDidChange(self.image!)
-                
-            }catch{
-                print("Image not delivered from remote URL")
-            }
-        }
-        dispatch_async(download, bloque)
-    }
+//    func downloadImageInBackground(){
+//        let download = dispatch_get_global_queue(DispatchQueue.GlobalQueuePriority.default,0)
+//        let bloque : dispatch_block_t = {
+//            do{
+//                let dataOfImage = try loadResourceFromUrl(withUrl: self.imageURL)
+//                try saveResourceToCache(withUrl: self.imageURL, andData: dataOfImage)
+//                guard let uiImg = UIImage(data: dataOfImage) else {
+//                    self.image = UIImage(imageLiteral: COVER_FILE)
+//                    return
+//                }
+//                self.image = uiImg
+//                
+//                // notificar de la descarga a suscriptores
+//                self.notifyAsyncImageDidChange(self.image!)
+//                
+//            }catch{
+//                print("Image not delivered from remote URL")
+//            }
+//        }
+//        dispatch_async(download, bloque)
+//    }
     
     func notifyAsyncImageDidChange(withImage: UIImage){
-        let nc = NSNotificationCenter.defaultCenter()
-        let notif = NSNotification(name: IMAGE_DID_CHANGE_NOTIFICATION,
+        let nc = NotificationCenter.default
+        let notif = NSNotification(name: NSNotification.Name(rawValue: IMAGE_DID_CHANGE_NOTIFICATION),
                                    object: self,
                                    userInfo: [IMAGE_KEY: withImage])
-        nc.postNotification(notif)
+        nc.post(notif as Notification)
     }
     
     

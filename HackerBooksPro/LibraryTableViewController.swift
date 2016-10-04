@@ -17,8 +17,6 @@ class LibraryTableViewController: CoreDataTableViewController, UISearchControlle
     let model = CoreDataStack(modelName: DATABASE, inMemory: false)
     let searchController = UISearchController(searchResultsController: nil)
     var delegate : LibraryTableViewControllerDelegate?
-    var isfirstLoad : Bool = true
-    
 }
 
 extension LibraryTableViewController{
@@ -43,15 +41,6 @@ extension LibraryTableViewController{
                               (NSSortDescriptor(key: "book.title",ascending: true))]
         let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: (model?.context)!, sectionNameKeyPath: "tag.tagName", cacheName: nil)
         self.fetchedResultsController? = fc as! NSFetchedResultsController<NSFetchRequestResult>
-        
-        /* Si habia un libro abierto por defecto */
-        let defaultBook = getIdObjectFromDefaults(inContext: model?.context)
-        
-        if (defaultBook != nil){
-            let bookVC = BookViewController(model: defaultBook!)
-            navigationController?.pushViewController(bookVC, animated: true)
-        }
-        
     }
     
     override func tableView(_ tableView: UITableView,
@@ -89,8 +78,7 @@ extension LibraryTableViewController{
         let bookTag = fetchedResultsController?.object(at: indexPath) as! BookTag
         let book = bookTag.book!
         let bookVC = BookViewController(model: book)
-        saveIdObjectInDefaults(withModel: book)
-//        saveBookInDefaults(book: book)
+        saveBookInDefaults(withModel: book)
         
         if (IS_IPHONE) {
             navigationController?.pushViewController(bookVC, animated: true)
@@ -107,20 +95,6 @@ extension LibraryTableViewController{
         navigationController?.pushViewController(bookVC, animated: true)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        /* Si habia un libro abierto por defecto */
-        if (isfirstLoad==true){
-            isfirstLoad = false
-            let model_contex = self.fetchedResultsController?.managedObjectContext
-            let defaultBook = getIdObjectFromDefaults(inContext:model_contex)
-            
-            if (defaultBook != nil){
-                let bookVC = BookViewController(model: defaultBook!)
-                navigationController?.pushViewController(bookVC, animated: true)
-            }
-        }
-        
-    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Alta en notificaciones de cambios en los modelos
@@ -182,8 +156,6 @@ extension LibraryTableViewController{
             if (book.cover?.photoData==nil){
                 let mainBundle = Bundle.main
                 let defaultImage = mainBundle.url(forResource: "PlaceholderBook", withExtension: "png")!
-                
-                // AsyncData
                 let theDefaultData = try! Data(contentsOf: defaultImage)
                 
                 DispatchQueue.global(qos: .default).async {
@@ -210,31 +182,6 @@ extension LibraryTableViewController{
                 return (book.cover?.image!)!
             }
         }
-
-        
-//        func getIdBook(id: NSManagedObjectID, inContext context: NSManagedObjectContext) throws -> Book {
-//            
-//            do {
-//                let object = try context.existingObject(with: id)
-//                return object as! Book
-//            } catch {
-//                throw HackerBooksError.idObjectError
-//            }
-//            
-//        }
-//        
-//        func getBookFromDefaults() -> Book? {
-//
-//            if let uriDefault = defaults.object(forKey: LAST_BOOK) ,
-//                let uri = NSKeyedUnarchiver.unarchiveObject(with: (uriDefault as! NSData) as Data),
-//                let uriId = model?.context.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: (uri as! NSURL) as URL){
-//                if let book = try? getIdBook(id: uriId, inContext: (model?.context)!) {
-//                    return book
-//                }
-//            }
-//            return nil
-//        }
-        
         
     func suscribeNotificationsFavoritesDidChange(){
         // Alta en notificación

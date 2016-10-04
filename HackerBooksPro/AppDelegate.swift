@@ -27,9 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Create LibraryTableViewController
         let libVC = LibraryTableViewController(fetchedResultsController: fc as! NSFetchedResultsController<NSFetchRequestResult>, style: .plain)
         
-        // Crear un Library VC de Favoritos
-//        let libVC = LibraryTableViewController(withModel: self.model, style: .plain)
-        
         // Se mete Library VC en un Library Nav
         let libNav = UINavigationController(rootViewController: libVC)
         
@@ -51,14 +48,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Create LibraryTableViewController
         let libVC = LibraryTableViewController(fetchedResultsController: fc as! NSFetchedResultsController<NSFetchRequestResult>, style: .plain)
         
-        // Crear un Library VC de Favoritos
-//        let libVC = LibraryTableViewController(withModel: self.model, style: .plain)
-        
         // Se mete Library VC en un Library Nav
         let libNav = UINavigationController(rootViewController: libVC)
         
         // Crear un Book VC
-        let book = getIdObjectFromDefaults(inContext: model.context)
+        let book = getBookFromDefaults(inContext: model.context)
         let bookVC = BookViewController(model: book!)
         
         // Se mete BookVC en un Book Nav
@@ -111,7 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             for oneDict in jsonArray{
                 do{
-                    let bookValues =  try decodeForCoreData(book: oneDict)
+                    let bookValues =  try decode(book: oneDict)
                     let title = bookValues.4
                     let authors = bookValues.0
                     let imageURL = bookValues.1
@@ -142,7 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         // Add the relation between author and book
                         theAuthor?.addToBooks(oneBook)
                         // Save to defaults
-                        saveIdObjectInDefaults(withModel: oneBook)
+                        saveBookInDefaults(withModel: oneBook)
                     }
                 }catch{
                     fatalError("Error while loading model")
@@ -177,20 +171,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var rootVC = UIViewController()
         
         if (!(IS_IPHONE)) {
-            // Tableta
             rootVC = self.rootViewControllerForPad(withModel: model)
         } else {
             rootVC = self.rootViewControllerForPhone(withModel: model)
         }
         
         self.window?.rootViewController = rootVC
-        
-        
-        
-        
-        
-        
-        
         
         // Creamos el navegador
 //        let navVC = UINavigationController(rootViewController: nVC)

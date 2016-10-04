@@ -34,7 +34,7 @@ typealias JSONArray = [JSONDictionary]
 
 //MARK: - Decodification
 
-func decodeForCoreData (book dict: JSONDictionary) throws ->
+func decode (book dict: JSONDictionary) throws ->
     ([String],URL,URL,[String],String){
         try validate(dictionary: dict)
         func extract(key: String) -> String{
@@ -49,38 +49,7 @@ func decodeForCoreData (book dict: JSONDictionary) throws ->
         return (authors,imgURL,pdfURL,tags,title)
 }
 
-/*
-func decode(book dict: JSONDictionary) throws -> Book{
-    
-   // validate first
-    try validate(dictionary: dict)
-    
-    // extract from dict
-    func extract(key: String) -> String{
-        return dict[key]!   // we know it can't be missing because we validated first!
-    }
-    
-    // parsing
-    let authors = parseCommaSeparated(string: extract(key: "authors"))
-    let imgURL = URL(string: extract(key: "image_url"))!
-    let pdfURL = URL(string: extract(key: "pdf_url"))!
-    let tags = parseCommaSeparated(string: extract(key: "tags"))
-    let title = extract(key: "title").capitalized
-    
-    let mainBundle = Bundle.main
-    
-    let defaultImage = mainBundle.url(forResource: "PlaceholderBook", withExtension: "png")!
-    let defaultPdf = mainBundle.url(forResource: "emptyPdf", withExtension: "pdf")!
-    
-    // AsyncData
-    let image = AsyncData(url: imgURL, defaultData: try! Data(contentsOf: defaultImage))
-    let pdf = AsyncData(url: pdfURL, defaultData: try! Data(contentsOf: defaultPdf))
-    
-    
-    return Book(title: title, authors: authors, tags: tags, pdf: pdf, image: image)
-    
-}
-*/
+
  
 func decode(book dict: JSONDictionary?) throws -> Book{
     
