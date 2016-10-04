@@ -63,11 +63,14 @@ class BookViewController: UIViewController {
 
     @IBAction func readPDF(_ sender: AnyObject) {
         
-//        // Crear un ReadVC
-//        let readVC = SimplePDFViewController(model: model)
-//        
-//        // Hacer un push sobre NavigationController
-//        navigationController?.pushViewController(readVC, animated: true)
+        // Guardar en Defaults
+        saveBookInDefaults(withModel: model)
+        
+        // Crear un ReadVC
+        let readVC = SimplePDFViewController(model: model)
+        
+        // Hacer un push sobre NavigationController
+        navigationController?.pushViewController(readVC, animated: true)
     }
     
     
