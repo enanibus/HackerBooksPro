@@ -14,18 +14,6 @@ enum Directories{
     case Cache
 }
 
-func saveBookInDefaults(book: Book) {
-    if let data = archiveURIRepresentation(book: book) {
-        defaults.set(data, forKey: LAST_BOOK)
-    }
-}
-
-func archiveURIRepresentation(book: Book) -> NSData? {
-    let uri = book.objectID.uriRepresentation()
-    return NSKeyedArchiver.archivedData(withRootObject: uri) as NSData?
-}
-
-
 //MARK: - NSUserDefaults & Favorites management
 
 func setDefaults(){
@@ -143,3 +131,15 @@ func getIdObjectFromDefaults(inContext context : NSManagedObjectContext?)->Book?
         return nil
     }
 }
+
+func saveBookInDefaults(book: Book) {
+    if let data = archiveURIRepresentation(book: book) {
+        defaults.set(data, forKey: LAST_BOOK)
+    }
+}
+
+func archiveURIRepresentation(book: Book) -> NSData? {
+    let uri = book.objectID.uriRepresentation()
+    return NSKeyedArchiver.archivedData(withRootObject: uri) as NSData?
+}
+

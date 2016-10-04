@@ -14,8 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let model = CoreDataStack(modelName: DATABASE, inMemory: false)!
-    let defaults = UserDefaults.standard
-
 
     func rootViewControllerForPhone(withModel model: CoreDataStack) -> UIViewController{
         
@@ -60,8 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let libNav = UINavigationController(rootViewController: libVC)
         
         // Crear un Book VC
-        let book = Book(title: "Book", imgURL: "", pdfURL: "", inContext: model.context)
-        let bookVC = BookViewController(model: book)
+        let book = getIdObjectFromDefaults(inContext: model.context)
+        let bookVC = BookViewController(model: book!)
         
         // Se mete BookVC en un Book Nav
         let bookNav = UINavigationController(rootViewController: bookVC)
@@ -92,7 +90,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         
         // Borrar el modelo
-        try! model.dropAllData()
+//        defaults.set(false, forKey: FIRST)
+//        try! model.dropAllData()
         
         // Descarga JSON
         // Pendiente realizar en background con GCD
@@ -105,7 +104,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Carga del modelo Core Data
         // Pendiente realizar en background con GCD
         // y de hacerlo en una función auxiliar
-//    if () {
+        
+    if !defaults.bool(forKey: FIRST) {
         do{
             let jsonArray = try loadFromDocuments()
             
@@ -152,7 +152,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Error while loading JSON")
         }
         model.save()
-//    }
+        defaults.set(true, forKey: FIRST)
+    }
         // Fetch request
 
 //        let fr = NSFetchRequest<Book>(entityName: Book.entityName)

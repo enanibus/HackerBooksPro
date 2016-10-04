@@ -17,6 +17,7 @@ class LibraryTableViewController: CoreDataTableViewController, UISearchControlle
     let model = CoreDataStack(modelName: DATABASE, inMemory: false)
     let searchController = UISearchController(searchResultsController: nil)
     var delegate : LibraryTableViewControllerDelegate?
+    var isfirstLoad : Bool = true
     
 }
 
@@ -42,6 +43,14 @@ extension LibraryTableViewController{
                               (NSSortDescriptor(key: "book.title",ascending: true))]
         let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: (model?.context)!, sectionNameKeyPath: "tag.tagName", cacheName: nil)
         self.fetchedResultsController? = fc as! NSFetchedResultsController<NSFetchRequestResult>
+        
+        /* Si habia un libro abierto por defecto */
+        let defaultBook = getIdObjectFromDefaults(inContext: model?.context)
+        
+        if (defaultBook != nil){
+            let bookVC = BookViewController(model: defaultBook!)
+            navigationController?.pushViewController(bookVC, animated: true)
+        }
         
     }
     
@@ -80,6 +89,8 @@ extension LibraryTableViewController{
         let bookTag = fetchedResultsController?.object(at: indexPath) as! BookTag
         let book = bookTag.book!
         let bookVC = BookViewController(model: book)
+        saveIdObjectInDefaults(withModel: book)
+//        saveBookInDefaults(book: book)
         
         if (IS_IPHONE) {
             navigationController?.pushViewController(bookVC, animated: true)
@@ -95,21 +106,31 @@ extension LibraryTableViewController{
         let bookVC = BookViewController(model: book)
         navigationController?.pushViewController(bookVC, animated: true)
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        /* Si habia un libro abierto por defecto */
+        if (isfirstLoad==true){
+            isfirstLoad = false
+            let model_contex = self.fetchedResultsController?.managedObjectContext
+            let defaultBook = getIdObjectFromDefaults(inContext:model_contex)
+            
+            if (defaultBook != nil){
+                let bookVC = BookViewController(model: defaultBook!)
+                navigationController?.pushViewController(bookVC, animated: true)
+            }
+        }
+        
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if (!IS_IPHONE) {
-        self.clearsSelectionOnViewWillAppear = (self.splitViewController?.isCollapsed)!
-        }
+        // Alta en notificaciones de cambios en los modelos
+        self.suscribeNotificationsFavoritesDidChange()
+        // Sincronizar vista y modelo
+        self.tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if searchController.isActive {
-            searchController.isActive = false
-        }
-        _ = try? self.model?.context.save()
     }
     
     //MARK: - Cell registration
@@ -189,30 +210,44 @@ extension LibraryTableViewController{
                 return (book.cover?.image!)!
             }
         }
-        
-        
-        func getIdBook(id: NSManagedObjectID, inContext context: NSManagedObjectContext) throws -> Book {
-            
-            do {
-                let object = try context.existingObject(with: id)
-                return object as! Book
-            } catch {
-                throw HackerBooksError.idObjectError
-            }
-            
-        }
-        
-        func getBookFromDefaults() -> Book? {
 
-            if let uriDefault = defaults.object(forKey: LAST_BOOK) ,
-                let uri = NSKeyedUnarchiver.unarchiveObject(with: (uriDefault as! NSData) as Data),
-                let uriId = model?.context.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: (uri as! NSURL) as URL){
-                if let book = try? getIdBook(id: uriId, inContext: (model?.context)!) {
-                    return book
-                }
-            }
-            return nil
-        }
+        
+//        func getIdBook(id: NSManagedObjectID, inContext context: NSManagedObjectContext) throws -> Book {
+//            
+//            do {
+//                let object = try context.existingObject(with: id)
+//                return object as! Book
+//            } catch {
+//                throw HackerBooksError.idObjectError
+//            }
+//            
+//        }
+//        
+//        func getBookFromDefaults() -> Book? {
+//
+//            if let uriDefault = defaults.object(forKey: LAST_BOOK) ,
+//                let uri = NSKeyedUnarchiver.unarchiveObject(with: (uriDefault as! NSData) as Data),
+//                let uriId = model?.context.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: (uri as! NSURL) as URL){
+//                if let book = try? getIdBook(id: uriId, inContext: (model?.context)!) {
+//                    return book
+//                }
+//            }
+//            return nil
+//        }
+        
+        
+    func suscribeNotificationsFavoritesDidChange(){
+        // Alta en notificación
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(favoriteDidChange),
+                        name: NSNotification.Name(rawValue:FAVORITES_DID_CHANGE_NOTIFICATION),
+                        object: nil)
+    }
+        
+    func favoriteDidChange(notification: NSNotification){
+        self.tableView.reloadData()
+    }
+        
 }
 
 extension LibraryTableViewController: UISearchResultsUpdating {

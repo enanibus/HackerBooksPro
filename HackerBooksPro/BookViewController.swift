@@ -19,9 +19,6 @@ class BookViewController: UIViewController {
     
     @IBOutlet weak var favorites: UIBarButtonItem!
     
-    let defaults = UserDefaults.standard
-    let stack = CoreDataStack(modelName: DATABASE, inMemory: false)
-    
     var model : Book{
         didSet {
             self.syncModelWithView()
@@ -29,8 +26,7 @@ class BookViewController: UIViewController {
         }
     }
 
-    
-    
+
     //MARK: - Initialization
     init(model: Book){
         self.model = model
@@ -46,7 +42,7 @@ class BookViewController: UIViewController {
     func syncModelWithView(){
         
         // Photo
-        self.photoView.image = model.cover?.image
+        self.photoView.image = getCover(ofBook: model)
         
         // Title
         self.title = model.title
@@ -83,6 +79,9 @@ class BookViewController: UIViewController {
         // Refresca los datos
          syncModelWithView()
         
+        // Notifica al modelo del cambio
+        self.notifySuscriptorsBookTagDidChange(withBookSelected: model)
+        
     }
     
     override func viewDidLoad() {
@@ -118,6 +117,14 @@ class BookViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
+    
+    func notifySuscriptorsBookTagDidChange(withBookSelected: Book){
+        let nc = NotificationCenter.default
+        let notif = NSNotification(name: NSNotification.Name(rawValue: FAVORITES_DID_CHANGE_NOTIFICATION),
+                                   object: model,
+                                   userInfo: [BOOK_KEY:withBookSelected])
+        nc.post(notif as Notification)
+    }
 
 }
 
@@ -133,6 +140,44 @@ extension BookViewController: LibraryTableViewControllerDelegate{
         syncModelWithView()
         
     }
+}
+
+// Download cover in case
+extension BookViewController {
+    func getCover(ofBook book:Book)->UIImage{
+        if (book.cover?.photoData==nil){
+            let mainBundle = Bundle.main
+            let defaultImage = mainBundle.url(forResource: "PlaceholderBook", withExtension: "png")!
+            
+            // AsyncData
+            let theDefaultData = try! Data(contentsOf: defaultImage)
+            
+            DispatchQueue.global(qos: .default).async {
+                let theUrlImage = URL(string: book.imageURL!)
+                let imageData = try? Data(contentsOf: theUrlImage!)
+                DispatchQueue.main.async {
+                    if (imageData==nil){
+                        book.cover?.photoData = nil
+                    }
+                    else{
+                        book.cover?.photoData = imageData as NSData?
+                        
+                        
+                        try! book.managedObjectContext?.save()
+                        self.photoView.image = book.cover?.image
+                        
+                    }
+                }
+            }
+            // Hay que mandar que descargue en segundo plano
+            return UIImage(data: theDefaultData)!
+        }
+        else{
+            return (book.cover?.image!)!
+        }
+    }
+    
+    
 }
 
 
