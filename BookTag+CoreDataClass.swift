@@ -22,43 +22,6 @@ public class BookTag: NSManagedObject {
 }
 
 extension BookTag{
-    static func booksForTag(theTag : Tag,
-                            inContext context: NSManagedObjectContext?)->[BookTag]?{
-        
-        let fr = NSFetchRequest<BookTag>(entityName: BookTag.entityName)
-        fr.fetchLimit = 50
-        fr.fetchBatchSize = 50
-        fr.sortDescriptors = [NSSortDescriptor.init(key: "book", ascending: true)]
-        fr.predicate = NSPredicate(format: "tag == %@", theTag)
-        
-        do{
-            let result = try context?.fetch(fr)
-            guard let resp = result else{
-                return nil
-            }
-            return resp
-        } catch{
-            return nil;
-        }
-    }
-    
-    static func tagsForBook(theBook : Book,
-                            inContext context: NSManagedObjectContext?)->[BookTag]?{
-        let fr = NSFetchRequest<BookTag>(entityName: BookTag.entityName)
-        fr.sortDescriptors = [NSSortDescriptor.init(key: "tag", ascending: true)]
-        //fr.predicate = NSPredicate(format: "book == %@", theBook)
-        
-        do{
-            let result = try context?.fetch(fr)
-            guard let resp = result else{
-                return nil
-            }
-            return resp
-        } catch{
-            return nil;
-        }
-        
-    }
     
     static func favoriteBookTag(ofBook book:Book,
                                 inContext context: NSManagedObjectContext?)->BookTag?{

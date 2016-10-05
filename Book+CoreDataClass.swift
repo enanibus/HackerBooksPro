@@ -13,7 +13,7 @@ import UIKit
 public class Book: NSManagedObject {
     static let entityName = "Book"
     
-    let model = CoreDataStack(modelName: DATABASE, inMemory: false)!
+    let sameOne = CoreDataStack.defaultStack(modelName:  DATABASE)!
     
     //MARK: - Initializers
     
@@ -84,20 +84,18 @@ extension Book{
         if (self.isFavorite == false){
             // Mark favorite the model
             self.isFavorite = true
-            // Create a "favorite" tag
             
             var favTag = Tag.tagForString("favorites", inContext: self.managedObjectContext)
             if (favTag==nil){
-                // No existe el tag hay que crearlo
+
                 favTag = Tag(tag: "favorites", inContext: self.managedObjectContext!)
             }
-            // Associate Book
+
             _ = BookTag(theBook: self,
                         theTag: favTag!,
                         inContext: self.managedObjectContext!)
             
-            try! self.managedObjectContext?.save()
-            model.save()
+            sameOne.save()
             
             
         }else{
@@ -106,9 +104,7 @@ extension Book{
             let theBookTag = BookTag.favoriteBookTag(ofBook: self,inContext: self.managedObjectContext)
             
             self.managedObjectContext?.delete(theBookTag!)
-            
-            try! self.managedObjectContext?.save()
-            self.model.save()
+            sameOne.save()
             
             
         }
@@ -119,9 +115,6 @@ extension Book{
 extension Book{
     static func observableKeys() -> [String] {return ["isFavorite"]};
     func setupKVO(){
-        // alta en las notificaciones
-        // para algunas propiedades
-        // Deberes: Usar una la funcion map
         for key in Book.observableKeys(){
             self.addObserver(self,
                              forKeyPath: key,
@@ -131,7 +124,6 @@ extension Book{
     }
     
     func tearDownKVO(){
-        // Baja en todas las notificaciones
         for key in Book.observableKeys(){
             self.removeObserver(self, forKeyPath: key)
         }

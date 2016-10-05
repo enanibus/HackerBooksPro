@@ -12,9 +12,8 @@ import CoreData
 class LibraryTableViewController: CoreDataTableViewController, UISearchControllerDelegate, LibraryTableViewControllerDelegate {
     internal func libraryTableViewController(vc: LibraryTableViewController, didSelectBook book: Book) {
     }
-
     
-    let model = CoreDataStack(modelName: DATABASE, inMemory: false)
+    let sameOne = CoreDataStack.defaultStack(modelName:  DATABASE)!
     let searchController = UISearchController(searchResultsController: nil)
     var delegate : LibraryTableViewControllerDelegate?
 }
@@ -39,7 +38,7 @@ extension LibraryTableViewController{
         fr.fetchBatchSize = 50
         fr.sortDescriptors = [(NSSortDescriptor(key: "tag.proxyForSorting",ascending: true)),
                               (NSSortDescriptor(key: "book.title",ascending: true))]
-        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: (model?.context)!, sectionNameKeyPath: "tag.tagName", cacheName: nil)
+        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: (sameOne.context), sectionNameKeyPath: "tag.tagName", cacheName: nil)
         self.fetchedResultsController? = fc as! NSFetchedResultsController<NSFetchRequestResult>
     }
     
@@ -217,7 +216,7 @@ extension LibraryTableViewController: UISearchResultsUpdating {
             fr.predicate = predicate
         }
         
-        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: (model?.context)!, sectionNameKeyPath: "tag.tagName", cacheName: nil)
+        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: (sameOne.context), sectionNameKeyPath: "tag.tagName", cacheName: nil)
         self.fetchedResultsController? = fc as!
             NSFetchedResultsController<NSFetchRequestResult>
         self.tableView.reloadData()

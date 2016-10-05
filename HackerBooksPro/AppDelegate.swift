@@ -13,8 +13,8 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let model = CoreDataStack(modelName: DATABASE, inMemory: false)!
-
+    let model = CoreDataStack.defaultStack(modelName: DATABASE)!
+    
     func rootViewControllerForPhone(withModel model: CoreDataStack) -> UIViewController{
         
         

@@ -10,7 +10,6 @@ import CoreData
 struct CoreDataStack {
     
     // MARK:  - Properties
-    
     fileprivate let model : NSManagedObjectModel
     fileprivate let coordinator : NSPersistentStoreCoordinator
     fileprivate let modelURL : URL
@@ -18,17 +17,20 @@ struct CoreDataStack {
     fileprivate let persistingContext : NSManagedObjectContext
     fileprivate let backgroundContext : NSManagedObjectContext
     let context : NSManagedObjectContext
-    fileprivate var inMemory: Bool = false
- 
     
-   
-
+    private static var _defaultStack : CoreDataStack?
+    static func defaultStack(modelName: String, inMemory: Bool = false) -> CoreDataStack?{
+        guard _defaultStack != nil else{
+            _defaultStack = CoreDataStack(modelName: modelName)
+            return _defaultStack
+        }
+        return _defaultStack
+    }
+    
     
     
     // MARK:  - Initializers
-    init?(modelName: String, inMemory: Bool = false){
-        
-        self.inMemory = inMemory
+    init?(modelName: String){
         
         // Assumes the model is in the main bundle
         guard let modelURL = Bundle.main.url(forResource: modelName, withExtension: "momd") else {
@@ -74,12 +76,7 @@ struct CoreDataStack {
         
         
         do{
-            // Meto aqui el que este en memoria o no, no se si esta bien
-            if inMemory == false {
-                try addStoreCoordinator(NSSQLiteStoreType, configuration: nil, storeURL: dbURL, options: nil)
-            }else{
-                try addStoreCoordinatorInMemory()
-            }
+            try addStoreCoordinator(NSSQLiteStoreType, configuration: nil, storeURL: dbURL, options: nil)
             
         }catch{
             print("unable to add store at \(dbURL)")
@@ -90,7 +87,6 @@ struct CoreDataStack {
         
         
     }
-    
     
     // MARK:  - Utils
     func addStoreCoordinator(_ storeType: String,
@@ -190,13 +186,7 @@ extension CoreDataStack {
     }
 }
 
-//MARK: - CoreData in Memory for testing
-extension CoreDataStack{
-    func addStoreCoordinatorInMemory() throws {
-         try coordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
-        
-    }
-}
+
 
 
 

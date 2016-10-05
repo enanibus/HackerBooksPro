@@ -145,14 +145,11 @@ extension BookViewController: LibraryTableViewControllerDelegate{
     }
 }
 
-// Download cover in case
 extension BookViewController {
     func getCover(ofBook book:Book)->UIImage{
         if (book.cover?.photoData==nil){
             let mainBundle = Bundle.main
             let defaultImage = mainBundle.url(forResource: "PlaceholderBook", withExtension: "png")!
-            
-            // AsyncData
             let theDefaultData = try! Data(contentsOf: defaultImage)
             
             DispatchQueue.global(qos: .default).async {
