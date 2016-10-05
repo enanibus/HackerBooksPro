@@ -80,12 +80,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Create the window
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        // Borrar el modelo
+        // Borrón y cuenta nueva
 //        defaults.set(false, forKey: FIRST)
-//        try! model.dropAllData()
+//        do{
+//            try model.dropAllData()
+//        }catch{
+//            print("Error while deleting model")
+//        }
         
         // Descarga JSON
-        // Pendiente realizar en background con GCD
         do{
             try downloadRemoteJSON()
         }catch{
@@ -93,58 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Carga del modelo Core Data
-        // Pendiente realizar en background con GCD
-        // y de hacerlo en una función auxiliar
-        
-    if !defaults.bool(forKey: FIRST) {
-        do{
-            let jsonArray = try loadFromDocuments()
-            
-            for oneDict in jsonArray{
-                do{
-                    let bookValues =  try decode(book: oneDict)
-                    let title = bookValues.4
-                    let authors = bookValues.0
-                    let imageURL = bookValues.1
-                    let pdfURL = bookValues.2
-                    let tags = bookValues.3
-                    
-                    // Add book to core data
-                    let oneBook = Book(title: title, imgURL: imageURL.absoluteString, pdfURL: pdfURL.absoluteString, inContext: model.context)
-                    // Add tags to core data
-                    for sTag in tags{
-                        var theTag : Tag?
-                        
-                        theTag = Tag.tagForString(sTag, inContext: model.context)
-                        if (theTag == nil){
-                            theTag = Tag(tag: sTag, inContext: model.context)
-                        }
-                        // Add the relation between tags and books
-                        _ = BookTag(theBook: oneBook, theTag: theTag!, inContext: model.context)
-                    }
-                    for sAuthor in authors{
-                        var theAuthor : Author?
-                        
-                        theAuthor = Author.authorForString(sAuthor, inContext: model.context)
-                        
-                        if (theAuthor == nil){
-                            theAuthor = Author(author: sAuthor, inContext: model.context)
-                        }
-                        // Add the relation between author and book
-                        theAuthor?.addToBooks(oneBook)
-                        // Save to defaults
-                        saveBookInDefaults(withModel: oneBook)
-                    }
-                }catch{
-                    fatalError("Error while loading model")
-                }
-            }
-        }catch{
-            fatalError("Error while loading JSON")
-        }
-        model.save()
-        defaults.set(true, forKey: FIRST)
-    }
+        loadDatabase()
         
         var rootVC = UIViewController()
         
@@ -184,7 +136,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    //MARK: - Carga en base de datos
+    func loadDatabase() {
+        if !defaults.bool(forKey: FIRST) {
+            do{
+                let jsonArray = try loadFromDocuments()
+                
+                for eachDict in jsonArray{
+                    do{
+                        let eachBook =  try decode(book: eachDict)
+                        let authors = eachBook.0
+                        let imageURL = eachBook.1
+                        let pdfURL = eachBook.2
+                        let tags = eachBook.3
+                        let title = eachBook.4
 
+                        let oneBook = Book(title: title, imgURL: imageURL.absoluteString, pdfURL: pdfURL.absoluteString, inContext: model.context)
+
+                        for eachTag in tags{
+                            var theTag : Tag?
+                            
+                            theTag = Tag.tagForString(eachTag, inContext: model.context)
+                            if (theTag == nil){
+                                theTag = Tag(tag: eachTag, inContext: model.context)
+                            }
+
+                            _ = BookTag(theBook: oneBook, theTag: theTag!, inContext: model.context)
+                        }
+                        for eachAuthor in authors{
+                            var theAuthor : Author?
+                            
+                            theAuthor = Author.authorForString(eachAuthor, inContext: model.context)
+                            
+                            if (theAuthor == nil){
+                                theAuthor = Author(author: eachAuthor, inContext: model.context)
+                            }
+
+                            theAuthor?.addToBooks(oneBook)
+
+                            saveBookInDefaults(withModel: oneBook)
+                        }
+                    }catch{
+                        fatalError("Error while loading model")
+                    }
+                }
+            }catch{
+                fatalError("Error while loading JSON")
+            }
+            model.save()
+            defaults.set(true, forKey: FIRST)
+        }
+        
+    }
 
 }
 

@@ -21,6 +21,7 @@ func setDefaults(){
     
     defaults.set(JSON_DOWNLOADED, forKey: JSON_DOWNLOADED)
     defaults.set(fav, forKey: FAVORITES)
+    defaults.set(false, forKey: FIRST)
     defaults.synchronize()
 }
 
