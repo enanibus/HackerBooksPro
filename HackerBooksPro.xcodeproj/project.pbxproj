@@ -11,6 +11,11 @@
 		0A08E1191DA41CEE00FAB993 /* AsyncPdf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A08E1181DA41CEE00FAB993 /* AsyncPdf.swift */; };
 		0A08E11B1DA43F8D00FAB993 /* SimplePDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A08E11A1DA43F8D00FAB993 /* SimplePDFViewController.swift */; };
 		0A08E11D1DA43F9B00FAB993 /* SimplePDFViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A08E11C1DA43F9B00FAB993 /* SimplePDFViewController.xib */; };
+		0A08E1271DA59A2D00FAB993 /* CoreDataCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A08E1261DA59A2D00FAB993 /* CoreDataCollectionViewController.swift */; };
+		0A08E12A1DA5AB3300FAB993 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A08E1291DA5AB3200FAB993 /* UIImage+Resize.swift */; };
+		0A08E12C1DA5AC1000FAB993 /* NotesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A08E12B1DA5AC1000FAB993 /* NotesCollectionViewController.swift */; };
+		0A08E12F1DA5B10A00FAB993 /* NoteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A08E12D1DA5B10A00FAB993 /* NoteCollectionViewCell.swift */; };
+		0A08E1301DA5B10A00FAB993 /* NoteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A08E12E1DA5B10A00FAB993 /* NoteCollectionViewCell.xib */; };
 		0A3173471D967506004E5D68 /* LibraryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3173461D967506004E5D68 /* LibraryTableViewController.swift */; };
 		0A31734A1D96CBD7004E5D68 /* Book+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3173481D96CBD7004E5D68 /* Book+CoreDataProperties.swift */; };
 		0A31734B1D96CBD7004E5D68 /* Author+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3173491D96CBD7004E5D68 /* Author+CoreDataProperties.swift */; };
@@ -29,7 +34,6 @@
 		0A456ABA1D7F68AD00A09089 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A456AB81D7F68AD00A09089 /* Main.storyboard */; };
 		0A456ABC1D7F68AD00A09089 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A456ABB1D7F68AD00A09089 /* Assets.xcassets */; };
 		0A456ABF1D7F68AD00A09089 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A456ABD1D7F68AD00A09089 /* LaunchScreen.storyboard */; };
-		0A456ACA1D7F68AE00A09089 /* HackerBooksProTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A456AC91D7F68AE00A09089 /* HackerBooksProTests.swift */; };
 		0A456AD51D7F68AE00A09089 /* HackerBooksProUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A456AD41D7F68AE00A09089 /* HackerBooksProUITests.swift */; };
 		0A4E88431D92E50900C59AD6 /* BookTag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4E883A1D92E50900C59AD6 /* BookTag+CoreDataProperties.swift */; };
 		0A4E88441D92E50900C59AD6 /* Annotation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4E883B1D92E50900C59AD6 /* Annotation+CoreDataProperties.swift */; };
@@ -51,10 +55,6 @@
 		0A5E0D471D9C65E10097F73F /* BookViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A5E0D461D9C65E10097F73F /* BookViewController.xib */; };
 		0A5E0D491D9C6EDE0097F73F /* PlaceholderBook.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A5E0D481D9C6EDE0097F73F /* PlaceholderBook.png */; };
 		0AD5DE6C1D903FD3001DB6C3 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5DE6B1D903FD3001DB6C3 /* CoreDataStack.swift */; };
-		0AD5DE721D9053D2001DB6C3 /* Pdf+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3F41871D8F33F200DB7713 /* Pdf+CoreDataClass.swift */; };
-		0AD5DE771D9053E1001DB6C3 /* Localization+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3F41911D8F33F200DB7713 /* Localization+CoreDataClass.swift */; };
-		0AD5DE781D9053E4001DB6C3 /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3F41931D8F33F200DB7713 /* Photo+CoreDataClass.swift */; };
-		0AD5DE791D9053E6001DB6C3 /* Annotation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3F41951D8F33F200DB7713 /* Annotation+CoreDataClass.swift */; };
 		0AD6D0941D97DBD60007876C /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6D0931D97DBD60007876C /* BookTableViewCell.swift */; };
 		0AD6D0981D97F48A0007876C /* BookTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AD6D0971D97F48A0007876C /* BookTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -81,6 +81,11 @@
 		0A08E1181DA41CEE00FAB993 /* AsyncPdf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncPdf.swift; sourceTree = "<group>"; };
 		0A08E11A1DA43F8D00FAB993 /* SimplePDFViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDFViewController.swift; sourceTree = "<group>"; };
 		0A08E11C1DA43F9B00FAB993 /* SimplePDFViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimplePDFViewController.xib; sourceTree = "<group>"; };
+		0A08E1261DA59A2D00FAB993 /* CoreDataCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataCollectionViewController.swift; sourceTree = "<group>"; };
+		0A08E1291DA5AB3200FAB993 /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
+		0A08E12B1DA5AC1000FAB993 /* NotesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesCollectionViewController.swift; sourceTree = "<group>"; };
+		0A08E12D1DA5B10A00FAB993 /* NoteCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCollectionViewCell.swift; sourceTree = "<group>"; };
+		0A08E12E1DA5B10A00FAB993 /* NoteCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoteCollectionViewCell.xib; sourceTree = "<group>"; };
 		0A3173461D967506004E5D68 /* LibraryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryTableViewController.swift; sourceTree = "<group>"; };
 		0A3173481D96CBD7004E5D68 /* Book+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Book+CoreDataProperties.swift"; path = "../Book+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0A3173491D96CBD7004E5D68 /* Author+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Author+CoreDataProperties.swift"; path = "../Author+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -279,11 +284,13 @@
 			isa = PBXGroup;
 			children = (
 				0A4E88521D92EF2F00C59AD6 /* CoreDataTableViewController.swift */,
+				0A08E1261DA59A2D00FAB993 /* CoreDataCollectionViewController.swift */,
 				0A3173461D967506004E5D68 /* LibraryTableViewController.swift */,
 				0A5E0D441D9C65DA0097F73F /* BookViewController.swift */,
 				0A5E0D461D9C65E10097F73F /* BookViewController.xib */,
 				0A08E11A1DA43F8D00FAB993 /* SimplePDFViewController.swift */,
 				0A08E11C1DA43F9B00FAB993 /* SimplePDFViewController.xib */,
+				0A08E12B1DA5AC1000FAB993 /* NotesCollectionViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -291,6 +298,7 @@
 		0A4E88551D92F33700C59AD6 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				0A08E1291DA5AB3200FAB993 /* UIImage+Resize.swift */,
 				0A08E1161DA41CE500FAB993 /* AsyncImage.swift */,
 				0A08E1181DA41CEE00FAB993 /* AsyncPdf.swift */,
 				0A4E88571D92F35600C59AD6 /* FileManager.swift */,
@@ -314,6 +322,8 @@
 			children = (
 				0AD6D0931D97DBD60007876C /* BookTableViewCell.swift */,
 				0AD6D0971D97F48A0007876C /* BookTableViewCell.xib */,
+				0A08E12D1DA5B10A00FAB993 /* NoteCollectionViewCell.swift */,
+				0A08E12E1DA5B10A00FAB993 /* NoteCollectionViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -428,6 +438,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A08E1301DA5B10A00FAB993 /* NoteCollectionViewCell.xib in Resources */,
 				0A456ABF1D7F68AD00A09089 /* LaunchScreen.storyboard in Resources */,
 				0A5E0D471D9C65E10097F73F /* BookViewController.xib in Resources */,
 				0A4E88651D92F48900C59AD6 /* emptyPdf.pdf in Resources */,
@@ -467,6 +478,8 @@
 				0A3F41991D8F33F200DB7713 /* Pdf+CoreDataClass.swift in Sources */,
 				0A3F41971D8F33F200DB7713 /* Book+CoreDataClass.swift in Sources */,
 				0A37DF871D84311B00069E24 /* HackerBooksPro.xcdatamodeld in Sources */,
+				0A08E12A1DA5AB3300FAB993 /* UIImage+Resize.swift in Sources */,
+				0A08E12F1DA5B10A00FAB993 /* NoteCollectionViewCell.swift in Sources */,
 				0A4E88431D92E50900C59AD6 /* BookTag+CoreDataProperties.swift in Sources */,
 				0A31734B1D96CBD7004E5D68 /* Author+CoreDataProperties.swift in Sources */,
 				0A31734A1D96CBD7004E5D68 /* Book+CoreDataProperties.swift in Sources */,
@@ -482,7 +495,9 @@
 				0A4E885A1D92F38000C59AD6 /* Config.swift in Sources */,
 				0A456AB71D7F68AD00A09089 /* ViewController.swift in Sources */,
 				0A4E88461D92E50900C59AD6 /* Pdf+CoreDataProperties.swift in Sources */,
+				0A08E1271DA59A2D00FAB993 /* CoreDataCollectionViewController.swift in Sources */,
 				0A3F41A71D8F33F200DB7713 /* Annotation+CoreDataClass.swift in Sources */,
+				0A08E12C1DA5AC1000FAB993 /* NotesCollectionViewController.swift in Sources */,
 				0A4E88581D92F35700C59AD6 /* FileManager.swift in Sources */,
 				0A4E88531D92EF2F00C59AD6 /* CoreDataTableViewController.swift in Sources */,
 				0AD5DE6C1D903FD3001DB6C3 /* CoreDataStack.swift in Sources */,
@@ -503,11 +518,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AD5DE771D9053E1001DB6C3 /* Localization+CoreDataClass.swift in Sources */,
-				0AD5DE791D9053E6001DB6C3 /* Annotation+CoreDataClass.swift in Sources */,
-				0AD5DE721D9053D2001DB6C3 /* Pdf+CoreDataClass.swift in Sources */,
-				0A456ACA1D7F68AE00A09089 /* HackerBooksProTests.swift in Sources */,
-				0AD5DE781D9053E4001DB6C3 /* Photo+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

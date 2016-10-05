@@ -132,7 +132,7 @@ extension LibraryTableViewController{
             let data = try! Data(contentsOf: defaultImageUrl)
             let img = UIImage(data: data as Data)!
             
-            if let img = item.cover?.image {
+            if let img = item.cover?.image?.resizeWith(width: 50.0) {
                 return img
             }
             else {

@@ -163,17 +163,19 @@ extension BookViewController {
                         book.cover?.photoData = imageData as NSData?
                         
                         
-                        try! book.managedObjectContext?.save()
+//                        try! book.managedObjectContext?.save()
                         self.photoView.image = book.cover?.image
                         
                     }
                 }
             }
-            // Hay que mandar que descargue en segundo plano
             return UIImage(data: theDefaultData)!
         }
         else{
-            return (book.cover?.image!)!
+            let w = self.photoView.bounds.width
+            let imgResize = book.cover?.image?.resizeWith(width: w)
+            return imgResize!
+//            return (book.cover?.image!)!
         }
     }
     

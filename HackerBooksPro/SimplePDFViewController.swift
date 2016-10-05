@@ -13,6 +13,12 @@ class SimplePDFViewController: UIViewController {
     //MARK: Properties
     var model : Book
 
+    @IBAction func viewNotes(_ sender: AnyObject) {
+    }
+    
+    @IBAction func addNote(_ sender: AnyObject) {
+    }
+    
     @IBOutlet weak var pdfViewer: UIWebView!
     
     init(model: Book){

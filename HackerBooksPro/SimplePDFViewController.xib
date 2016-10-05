@@ -17,14 +17,31 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <webView contentMode="scaleToFill" id="FQM-nr-0ep">
-                    <frame key="frameInset"/>
+                <webView contentMode="scaleToFill" misplaced="YES" id="FQM-nr-0ep">
+                    <frame key="frameInset" maxY="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </webView>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" id="172-rX-3pm">
+                    <frame key="frameInset" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <items>
+                        <barButtonItem title="Notas" id="nHl-Kg-eG8">
+                            <connections>
+                                <action selector="viewNotes:" destination="-1" id="lcx-cc-QKr"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="s7q-tu-uDp"/>
+                        <barButtonItem systemItem="add" id="QJG-8a-kJO">
+                            <connections>
+                                <action selector="addNote:" destination="-1" id="HVR-zb-UGK"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="289" y="413"/>
+            <point key="canvasLocation" x="287.5" y="416.5"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
