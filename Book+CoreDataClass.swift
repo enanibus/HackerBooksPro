@@ -13,7 +13,7 @@ import UIKit
 public class Book: NSManagedObject {
     static let entityName = "Book"
     
-    let model = CoreDataStack(modelName: DATABASE, inMemory: false)
+    let model = CoreDataStack(modelName: DATABASE, inMemory: false)!
     
     //MARK: - Initializers
     
@@ -97,7 +97,7 @@ extension Book{
                         inContext: self.managedObjectContext!)
             
             try! self.managedObjectContext?.save()
-            model?.save()
+            model.save()
             
             
         }else{
@@ -108,7 +108,7 @@ extension Book{
             self.managedObjectContext?.delete(theBookTag!)
             
             try! self.managedObjectContext?.save()
-            self.model?.save()
+            self.model.save()
             
             
         }
