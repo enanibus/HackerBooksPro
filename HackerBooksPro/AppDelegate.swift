@@ -77,9 +77,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
         print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])
         
-        // Clean up all local caches
-//        AsyncData.removeAllLocalFiles()
-        
         // Create the window
         window = UIWindow(frame: UIScreen.main.bounds)
         
@@ -148,25 +145,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         model.save()
         defaults.set(true, forKey: FIRST)
     }
-        // Fetch request
-
-//        let fr = NSFetchRequest<Book>(entityName: Book.entityName)
-//        fr.fetchBatchSize = 50
-//        fr.sortDescriptors = [NSSortDescriptor(key: "title",ascending: true)]
-//        
-//        let fc = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: model.context, sectionNameKeyPath: nil, cacheName: nil)
-        
-        // Create LibraryTableViewController
-        
-//        let nVC = LibraryTableViewController(fetchedResultsController: fc as! NSFetchedResultsController<NSFetchRequestResult>, style: .plain)
-        
-        // iPhone - iPad
-//        if (IS_IPHONE) {
-//            libNav = UINavigationController(rootViewController: nVC)
-//        }
-//        else {
-//            libNav = UINavigationController(rootViewController: nVC)
-//        }
         
         var rootVC = UIViewController()
         
@@ -178,16 +156,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window?.rootViewController = rootVC
         
-        // Creamos el navegador
-//        let navVC = UINavigationController(rootViewController: nVC)
- 
-        // La window
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//        window?.rootViewController = libNav
         window?.makeKeyAndVisible()
 
         model.autoSave(5)
         return true
+        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

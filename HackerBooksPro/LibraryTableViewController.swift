@@ -86,6 +86,12 @@ extension LibraryTableViewController{
             delegate?.libraryTableViewController(vc: self, didSelectBook: book)
         }
         
+        // Avisar al delegado
+        delegate?.libraryTableViewController(vc: self, didSelectBook: book)
+        
+        // Enviamos la misma info via notificaciones
+        self.notifySelectedBookDidChange(withBookSelected: book)
+        
     }
     
     func libraryTableViewController(viewController: LibraryTableViewController, didSelectBook book: Book) {
@@ -150,37 +156,16 @@ extension LibraryTableViewController{
             }
             return img
         }
-
-        func downloadCover(ofBook book:Book)->UIImage{
-            if (book.cover?.photoData==nil){
-                let mainBundle = Bundle.main
-                let defaultImage = mainBundle.url(forResource: "PlaceholderBook", withExtension: "png")!
-                let theDefaultData = try! Data(contentsOf: defaultImage)
-                
-                DispatchQueue.global(qos: .default).async {
-                    let theUrlImage = URL(string: book.imageURL!)
-                    let imageData = try? Data(contentsOf: theUrlImage!)
-                    DispatchQueue.main.async {
-                        if (imageData==nil){
-                            book.cover?.photoData = nil
-                        }
-                        else{
-                            book.cover?.photoData = imageData as NSData?
-                            
-                            self.tableView.reloadData()
-                            
-                            try! book.managedObjectContext?.save()
-                            
-                        }
-                    }
-                }
-                // Hay que mandar que descargue en segundo plano
-                return UIImage(data: theDefaultData)!
-            }
-            else{
-                return (book.cover?.image!)!
-            }
-        }
+        
+    //MARK: - Notificaciones
+        
+    func notifySelectedBookDidChange(withBookSelected: Book){
+        let nc = NotificationCenter.default
+        let notif = NSNotification(name: NSNotification.Name(rawValue: BOOK_DID_CHANGE_NOTIFICATION),
+                                       object: self,
+                                       userInfo: [BOOK_KEY:withBookSelected])
+        nc.post(notif as Notification)
+    }
         
     func suscribeNotificationsFavoritesDidChange(){
         // Alta en notificación
