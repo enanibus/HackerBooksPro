@@ -55,7 +55,7 @@ class NotesCollectionViewController: CoreDataCollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let nota = self.fetchedResultsController?.object(at: indexPath) as! Annotation
-        let notaVc = NoteViewController(model: nota)
+        let notaVc = NotesViewController(model: nota)
         self.navigationController?.pushViewController(notaVc, animated: true)
         
     }

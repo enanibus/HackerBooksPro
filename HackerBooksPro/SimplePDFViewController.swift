@@ -26,13 +26,6 @@ class SimplePDFViewController: UIViewController {
                                             managedObjectContext: model.managedObjectContext!,
                                             sectionNameKeyPath: nil, cacheName: nil)
         
-        // Create Table viewController
-        /*
-         let nVC = NotesTableViewController(fetchedResultsController: fc as! NSFetchedResultsController<NSFetchRequestResult>, style: .plain)
-         
-         self.navigationController?.pushViewController(nVC, animated: true)
-         */
-        
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 140, height: 150)
         layout.scrollDirection = .vertical
@@ -43,7 +36,6 @@ class SimplePDFViewController: UIViewController {
                                          bottom: 10,
                                          right: 10)
         
-        // Creamos el CollectionViewController
         let cv = NotesCollectionViewController(fetchedResultsController: fc as! NSFetchedResultsController<NSFetchRequestResult>,
                                                layout: layout)
         
@@ -52,7 +44,7 @@ class SimplePDFViewController: UIViewController {
     
     @IBAction func addNote(_ sender: AnyObject) {
         let note = Annotation(withBook: model, inContext: model.managedObjectContext!)
-        let noteVC = NoteViewController(model: note)
+        let noteVC = NotesViewController(model: note)
         self.navigationController?.pushViewController(noteVC, animated: true)
     }
     
@@ -146,7 +138,6 @@ extension SimplePDFViewController {
                         let thePdf = Pdf(withData: pdfData!,
                                          inContext: book.managedObjectContext!)
                         book.pdf = thePdf
-//                        try! book.managedObjectContext?.save()
                         
                     }
                 }

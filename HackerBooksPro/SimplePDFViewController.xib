@@ -33,7 +33,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="s7q-tu-uDp"/>
-                        <barButtonItem systemItem="add" id="QJG-8a-kJO">
+                        <barButtonItem systemItem="compose" id="QJG-8a-kJO">
                             <connections>
                                 <action selector="addNote:" destination="-1" id="HVR-zb-UGK"/>
                             </connections>

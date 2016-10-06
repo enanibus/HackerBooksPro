@@ -30,14 +30,14 @@ class NoteViewController: UIViewController {
     
     
     //MARK: - Init
-    var model: Annotation
+    var _model: Annotation
     
     @IBOutlet weak var noteTextView: UITextView!
     
     @IBOutlet weak var titleView: UITextField!
-    
+
     init(model: Annotation){
-        self.model = model
+        _model = model
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -45,47 +45,43 @@ class NoteViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Actions
+    
+    
+    
+    //MARK: - Sync
     func syncModelWithView(){
-        titleView?.text = model.title
-        noteTextView?.text = model.text
-        if (model.photo?.image != nil){
-            let w = imageView.bounds.width
-            let imgResize = model.photo?.image!.resizeWith(width: w)
-            imageView?.image = imgResize
+        self.titleView?.text = _model.title
+        self.noteTextView?.text = _model.text
+        if (_model.photo?.image != nil){
+            let w = self.imageView.bounds.width
+            let imgResize = _model.photo?.image!.resizeWith(width: w)
+            self.imageView.image = imgResize
+            
         }
-        
+
     }
     
     func syncViewWithModel(){
-        model.title = titleView?.text
-        model.text = noteTextView?.text
+        _model.title = self.titleView?.text
+        _model.text = self.noteTextView?.text
     }
     
     //MARK: - LifeCycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-//        self.navigationController?.navigationBar.isTranslucent=false
-        self.title = "Nota"
-        
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         syncModelWithView()
     }
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationController?.navigationBar.isTranslucent=false
+        self.title = "Annotations"
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.model.managedObjectContext?.processPendingChanges()
+        // Prueba para evitar la cascada
+        self._model.managedObjectContext?.processPendingChanges()
         syncViewWithModel()
     }
-    
     
     
 }
