@@ -21,7 +21,7 @@ public class Annotation: NSManagedObject {
         // Asignamos el libro
         self.book = book
         self.title = book.title
-        self.text = ""
+        self.text = "Nueva Nota"
         self.creationDate = NSDate()
         self.modificationDate = NSDate()
         
@@ -29,7 +29,7 @@ public class Annotation: NSManagedObject {
 }
 //MARK: - KVO
 extension Annotation{
-    static func observableKeys()->[String]{return ["title","text","photo"]};
+    static func observableKeys()->[String]{return ["title","text","photo.photoData"]};
     
     func setupKVO(){
         for key in Annotation.observableKeys(){

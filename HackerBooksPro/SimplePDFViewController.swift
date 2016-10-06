@@ -146,7 +146,7 @@ extension SimplePDFViewController {
                         let thePdf = Pdf(withData: pdfData!,
                                          inContext: book.managedObjectContext!)
                         book.pdf = thePdf
-                        try! book.managedObjectContext?.save()
+//                        try! book.managedObjectContext?.save()
                         
                     }
                 }

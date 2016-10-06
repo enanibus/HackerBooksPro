@@ -30,16 +30,14 @@ class NoteViewController: UIViewController {
     
     
     //MARK: - Init
-    var _model: Annotation
-    
-//    var isFirstLoad : Bool = true
+    var model: Annotation
     
     @IBOutlet weak var noteTextView: UITextView!
     
     @IBOutlet weak var titleView: UITextField!
     
     init(model: Annotation){
-        _model = model
+        self.model = model
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -49,25 +47,26 @@ class NoteViewController: UIViewController {
     
     //MARK: - Actions
     func syncModelWithView(){
-        self.titleView?.text = _model.title
-        self.noteTextView?.text = _model.text
-        if (_model.photo?.image != nil){
-            let w = self.imageView?.bounds.width
-            let imgResize = _model.photo?.image!.resizeWith(width: w!)
-            self.imageView?.image = imgResize
+        titleView?.text = model.title
+        noteTextView?.text = model.text
+        if (model.photo?.image != nil){
+            let w = imageView.bounds.width
+            let imgResize = model.photo?.image!.resizeWith(width: w)
+            imageView?.image = imgResize
         }
         
     }
     
     func syncViewWithModel(){
-        _model.title = self.titleView?.text
-        _model.text = self.noteTextView?.text
+        model.title = titleView?.text
+        model.text = noteTextView?.text
     }
     
     //MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.navigationController?.navigationBar.isTranslucent=false
         self.title = "Nota"
         
     }
@@ -83,7 +82,7 @@ class NoteViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self._model.managedObjectContext?.processPendingChanges()
+        self.model.managedObjectContext?.processPendingChanges()
         syncViewWithModel()
     }
     
