@@ -1,5 +1,5 @@
 //
-//  NoteViewController.swift
+//  NotesViewController.swift
 //  HackerBooksPro
 //
 //  Created by Jacobo Enriquez Gabeiras on 5/10/16.
@@ -12,7 +12,7 @@ import CoreLocation
 class NotesViewController: UIViewController {
     @IBAction func shareNote(_ sender: AnyObject) {
         // Hay que compartir la nota por email
-        let objectsToShare: [AnyObject] = [_model.title as AnyObject,_model.text as AnyObject,(_model.photo?.image)!]
+        let objectsToShare: [AnyObject] = [model.title as AnyObject,model.text as AnyObject,(model.photo?.image)!]
         let uiAct = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         
         uiAct.popoverPresentationController?.sourceView = self.view
@@ -34,83 +34,75 @@ class NotesViewController: UIViewController {
         
     }
     @IBOutlet weak var noteImageView: UIImageView!
+    
     @IBAction func takePhoto(_ sender: AnyObject) {
-        // Crear una instancia de UIImagePicker
+
         let picker = UIImagePickerController()
         
-        // Configurarlo
         if UIImagePickerController.isCameraDeviceAvailable(.rear){
             picker.sourceType = .camera
         } else{
             picker.sourceType = .photoLibrary
         }
         
-        
         picker.delegate = self
-        
-        // Mostrarlo de forma modal
         self.present(picker, animated: true){
-            // Por si quieres hacer algo más nada más mostrarse el picker
-            
+
         }
 
     }
     //MARK: - Init
-    var _model: Annotation
+    var model: Annotation
     
-    var isFirstLoad : Bool = true
+    @IBOutlet weak var titleNote: UITextField!
     
     @IBOutlet weak var noteTextView: UITextView!
     
     @IBOutlet weak var titleView: UITextField!
     
     init(model: Annotation){
-        _model = model
+        self.model = model
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
     
-    
-    
-    //MARK: - Sync
+    //MARK: - Utils
     func syncModelWithView(){
-        self.titleView.text = _model.title
-        self.noteTextView.text = _model.text
-        if (_model.photo?.image != nil){
+        self.titleView.text = model.book?.title
+        self.titleNote.text = model.title
+        self.noteTextView.text = model.text
+        if (model.photo?.image != nil){
             let w = self.noteImageView.bounds.width
-            let imgResize = _model.photo?.image!.resizeWith(width: w)
+            let imgResize = model.photo?.image!.resizeWith(width: w)
             self.noteImageView.image = imgResize
             
         }
         
-        if (_model.localization != nil){
-            self.gpsStatus.image = UIImage(named: "posicion_gps.png")
-        }
+//        if (_model.localization != nil){
+//            self.gpsStatus.image = UIImage(named: "posicion_gps.png")
+//        }
     }
     
     func syncViewWithModel(){
-        _model.title = self.titleView.text
-        _model.text = self.noteTextView.text
+        model.title = self.titleNote.text
+        model.text = self.noteTextView.text
+
     }
-    
-    //MARK: - LifeCycle
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         syncModelWithView()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isTranslucent=false
-        self.title = "Annotations"
+        self.title = "Nota"
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        // Prueba para evitar la cascada
-        self._model.managedObjectContext?.processPendingChanges()
+        self.model.managedObjectContext?.processPendingChanges()
         syncViewWithModel()
     }
     
@@ -123,10 +115,8 @@ extension NotesViewController: UIImagePickerControllerDelegate,UINavigationContr
         self.dismiss(animated: true){}
         let auxFoto = info[UIImagePickerControllerOriginalImage] as!  UIImage?
         if (auxFoto != nil){
-            // Cogemos la foto del carrete
-            let laFoto = Photo(image: auxFoto!, inContext: _model.managedObjectContext!)
-            // Asignamos la foto a la anotación
-            _model.photo = laFoto
+            let laFoto = Photo(image: auxFoto!, inContext: model.managedObjectContext!)
+            model.photo = laFoto
             syncViewWithModel()
         }
     }
