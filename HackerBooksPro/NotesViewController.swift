@@ -10,15 +10,35 @@ import UIKit
 import CoreLocation
 
 class NotesViewController: UIViewController {
+    
+    let sameOne = CoreDataStack.defaultStack(modelName: DATABASE)!
+    
     @IBAction func shareNote(_ sender: AnyObject) {
-        // Hay que compartir la nota por email
-        let objectsToShare: [AnyObject] = [model.title as AnyObject,model.text as AnyObject,(model.photo?.image)!]
-        let uiAct = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         
-        uiAct.popoverPresentationController?.sourceView = self.view
+        // Ojo, tiene que haber foto asignada para compartir
+        if (model.photo?.image != nil) {
+            let objectsToShare: [AnyObject] = [model.title as AnyObject,model.text as AnyObject,(model.photo?.image)!]
+            let uiAct = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         
-        self.present(uiAct, animated: true, completion: nil)
+            uiAct.popoverPresentationController?.sourceView = self.view
         
+            self.present(uiAct, animated: true, completion: nil)
+        }
+        
+        else {
+            let alert = UIAlertController(title: "Compartir nota", message: "Haz una foto o escoge una de la galería de fotos para compartir", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(action)
+            present(alert, animated: true, completion: nil)
+        }
+        
+    }
+    
+    @IBAction func deleteNote(_ sender: AnyObject) {
+        let nota = self.model
+        nota.setupKVO()
+        sameOne.context.delete(nota)
+        _ = navigationController?.popViewController(animated: true)
     }
     
     @IBOutlet weak var gpsStatus: UIImageView!
@@ -125,20 +145,13 @@ extension NotesViewController: UIImagePickerControllerDelegate,UINavigationContr
 //MARK: - LocationManager
 //extension NotesViewController: CLLocationManagerDelegate{
 //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        
-//        // Se para, que no consume
 //        locationManager.stopUpdatingLocation()
-//        // Pillamos la ultima posicion
 //        let posicion = locations.last
-//        
-//        // Lo metemos en CoreData
-//        var savePosition = Localization.exists(position: posicion!, inContext: _model.managedObjectContext)
+//        var savePosition = Localization.exists(position: posicion!, inContext: model.managedObjectContext)
 //        if (savePosition == nil){
-//            // No existe creamos 
-//            savePosition = Localization(withPosition: posicion!, inContext: _model.managedObjectContext!)
+//            savePosition = Localization(withPosition: posicion!, inContext: model.managedObjectContext!)
 //        }
-//        // Asignamos a la nota
-//        savePosition?.addToAnnotation(_model)
+//        savePosition?.addToAnnotation(model)
 //        syncModelWithView()
 //        
 //    }

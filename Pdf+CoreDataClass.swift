@@ -9,10 +9,6 @@
 import Foundation
 import CoreData
 
-//public class Pdf: NSManagedObject {
-//
-//}
-
 public class Pdf: NSManagedObject {
     static let entityName = "Pdf"
     convenience init (withData: Data,

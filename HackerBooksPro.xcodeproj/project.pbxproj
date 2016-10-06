@@ -18,6 +18,8 @@
 		0A08E1301DA5B10A00FAB993 /* NoteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A08E12E1DA5B10A00FAB993 /* NoteCollectionViewCell.xib */; };
 		0A08E1451DA6AB9300FAB993 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A08E1431DA6AB9300FAB993 /* NotesViewController.swift */; };
 		0A08E1461DA6AB9300FAB993 /* NotesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A08E1441DA6AB9300FAB993 /* NotesViewController.xib */; };
+		0A08E14A1DA6C21E00FAB993 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A08E1481DA6C21E00FAB993 /* MapViewController.swift */; };
+		0A08E14B1DA6C21E00FAB993 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A08E1491DA6C21E00FAB993 /* MapViewController.xib */; };
 		0A3173471D967506004E5D68 /* LibraryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3173461D967506004E5D68 /* LibraryTableViewController.swift */; };
 		0A31734A1D96CBD7004E5D68 /* Book+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3173481D96CBD7004E5D68 /* Book+CoreDataProperties.swift */; };
 		0A31734B1D96CBD7004E5D68 /* Author+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3173491D96CBD7004E5D68 /* Author+CoreDataProperties.swift */; };
@@ -90,6 +92,8 @@
 		0A08E12E1DA5B10A00FAB993 /* NoteCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoteCollectionViewCell.xib; sourceTree = "<group>"; };
 		0A08E1431DA6AB9300FAB993 /* NotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		0A08E1441DA6AB9300FAB993 /* NotesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotesViewController.xib; sourceTree = "<group>"; };
+		0A08E1481DA6C21E00FAB993 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		0A08E1491DA6C21E00FAB993 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		0A3173461D967506004E5D68 /* LibraryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryTableViewController.swift; sourceTree = "<group>"; };
 		0A3173481D96CBD7004E5D68 /* Book+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Book+CoreDataProperties.swift"; path = "../Book+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0A3173491D96CBD7004E5D68 /* Author+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Author+CoreDataProperties.swift"; path = "../Author+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -297,6 +301,8 @@
 				0A08E12B1DA5AC1000FAB993 /* NotesCollectionViewController.swift */,
 				0A08E1431DA6AB9300FAB993 /* NotesViewController.swift */,
 				0A08E1441DA6AB9300FAB993 /* NotesViewController.xib */,
+				0A08E1481DA6C21E00FAB993 /* MapViewController.swift */,
+				0A08E1491DA6C21E00FAB993 /* MapViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -445,6 +451,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A08E1301DA5B10A00FAB993 /* NoteCollectionViewCell.xib in Resources */,
+				0A08E14B1DA6C21E00FAB993 /* MapViewController.xib in Resources */,
 				0A456ABF1D7F68AD00A09089 /* LaunchScreen.storyboard in Resources */,
 				0A5E0D471D9C65E10097F73F /* BookViewController.xib in Resources */,
 				0A4E88651D92F48900C59AD6 /* emptyPdf.pdf in Resources */,
@@ -503,6 +510,7 @@
 				0A456AB71D7F68AD00A09089 /* ViewController.swift in Sources */,
 				0A4E88461D92E50900C59AD6 /* Pdf+CoreDataProperties.swift in Sources */,
 				0A08E1271DA59A2D00FAB993 /* CoreDataCollectionViewController.swift in Sources */,
+				0A08E14A1DA6C21E00FAB993 /* MapViewController.swift in Sources */,
 				0A3F41A71D8F33F200DB7713 /* Annotation+CoreDataClass.swift in Sources */,
 				0A08E12C1DA5AC1000FAB993 /* NotesCollectionViewController.swift in Sources */,
 				0A4E88581D92F35700C59AD6 /* FileManager.swift in Sources */,

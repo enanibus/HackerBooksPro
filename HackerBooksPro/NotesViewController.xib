@@ -37,9 +37,15 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="eqE-NH-Voe"/>
-                        <barButtonItem title="Localización" id="VKO-Cr-qCS">
+                        <barButtonItem title="Mapa" id="VKO-Cr-qCS">
                             <connections>
                                 <action selector="guardarPosicionGps:" destination="-1" id="xsn-fS-sdw"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="t3R-7F-MiW"/>
+                        <barButtonItem systemItem="trash" id="woB-zX-1RU">
+                            <connections>
+                                <action selector="deleteNote:" destination="-1" id="u07-ta-54H"/>
                             </connections>
                         </barButtonItem>
                     </items>

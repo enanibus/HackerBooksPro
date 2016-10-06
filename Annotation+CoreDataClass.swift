@@ -17,8 +17,7 @@ public class Annotation: NSManagedObject {
         let entity = NSEntityDescription.entity(forEntityName: Annotation.entityName, in: context)!
         
         self.init(entity: entity, insertInto: context)
-        
-        // Asignamos el libro
+
         self.book = book
         self.title = book.title
         self.text = "Nueva Nota"
