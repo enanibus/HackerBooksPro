@@ -11,15 +11,14 @@ import UIKit
 class NotesCollectionViewController: CoreDataCollectionViewController {
     
     
-    //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Notas"
+        registerNib()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.registerNib()
-        self.title = "Notas"
     }
     
     override func didReceiveMemoryWarning() {
@@ -36,13 +35,13 @@ class NotesCollectionViewController: CoreDataCollectionViewController {
     
     //MARK: - Data source
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        // Obtener el objeto
+        // Obtener nota
         let note = self.fetchedResultsController?.object(at: indexPath) as! Annotation
         
-        // Obtener una celda
+        // Celda personalizada
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoteCollectionViewCell.cellID, for: indexPath) as! NoteCollectionViewCell
         
-        // Configurar una celda
+        // Configurar la celda
         cell.layer.cornerRadius = 8
         cell.textView.text = note.title
         cell.textView.isUserInteractionEnabled = false

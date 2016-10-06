@@ -161,11 +161,7 @@ extension BookViewController {
                     }
                     else{
                         book.cover?.photoData = imageData as NSData?
-                        
-                        
-//                        try! book.managedObjectContext?.save()
                         self.photoView.image = book.cover?.image
-                        
                     }
                 }
             }

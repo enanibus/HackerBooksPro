@@ -41,18 +41,6 @@ class NotesViewController: UIViewController {
         _ = navigationController?.popViewController(animated: true)
     }
     
-    @IBOutlet weak var gpsStatus: UIImageView!
-    let locationManager = CLLocationManager()
-    
-    @IBAction func guardarPosicionGps(_ sender: AnyObject) {
-        
-        
-//        locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
-        locationManager.startUpdatingLocation()
-        
-        
-    }
     @IBOutlet weak var noteImageView: UIImageView!
     
     @IBAction func takePhoto(_ sender: AnyObject) {
@@ -71,6 +59,7 @@ class NotesViewController: UIViewController {
         }
 
     }
+    
     //MARK: - Init
     var model: Annotation
     
@@ -98,12 +87,7 @@ class NotesViewController: UIViewController {
             let w = self.noteImageView.bounds.width
             let imgResize = model.photo?.image!.resizeWith(width: w)
             self.noteImageView.image = imgResize
-            
         }
-        
-//        if (_model.localization != nil){
-//            self.gpsStatus.image = UIImage(named: "posicion_gps.png")
-//        }
     }
     
     func syncViewWithModel(){
@@ -142,17 +126,3 @@ extension NotesViewController: UIImagePickerControllerDelegate,UINavigationContr
     }
 }
 
-//MARK: - LocationManager
-//extension NotesViewController: CLLocationManagerDelegate{
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        locationManager.stopUpdatingLocation()
-//        let posicion = locations.last
-//        var savePosition = Localization.exists(position: posicion!, inContext: model.managedObjectContext)
-//        if (savePosition == nil){
-//            savePosition = Localization(withPosition: posicion!, inContext: model.managedObjectContext!)
-//        }
-//        savePosition?.addToAnnotation(model)
-//        syncModelWithView()
-//        
-//    }
-//}

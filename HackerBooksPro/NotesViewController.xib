@@ -8,7 +8,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NotesViewController" customModule="HackerBooksPro" customModuleProvider="target">
             <connections>
-                <outlet property="gpsStatus" destination="xbV-J8-Jhn" id="Dlx-mY-6ee"/>
                 <outlet property="noteImageView" destination="51d-fV-sih" id="fSG-gX-bNK"/>
                 <outlet property="noteTextView" destination="AWp-MB-2t7" id="sEP-Pn-1YJ"/>
                 <outlet property="titleNote" destination="Faf-Cd-xu2" id="YFt-eg-vw8"/>
@@ -37,12 +36,6 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="eqE-NH-Voe"/>
-                        <barButtonItem title="Mapa" id="VKO-Cr-qCS">
-                            <connections>
-                                <action selector="guardarPosicionGps:" destination="-1" id="xsn-fS-sdw"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="t3R-7F-MiW"/>
                         <barButtonItem systemItem="trash" id="woB-zX-1RU">
                             <connections>
                                 <action selector="deleteNote:" destination="-1" id="u07-ta-54H"/>
@@ -50,35 +43,31 @@
                         </barButtonItem>
                     </items>
                 </toolbar>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" text="New note" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AWp-MB-2t7">
-                    <frame key="frameInset" minX="4.27%" minY="233" width="91.47%" height="174"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="emptyBookCover.png" translatesAutoresizingMaskIntoConstraints="NO" id="51d-fV-sih">
                     <frame key="frameInset" minX="50.00%" minY="424" width="343" height="171"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xbV-J8-Jhn">
-                    <frame key="frameInset" minY="19.34%" width="60" height="57" maxX="158"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                </imageView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="New title" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Faf-Cd-xu2" userLabel="Title Note">
-                    <frame key="frameInset" minX="16" minY="183" width="343" height="30"/>
+                    <frame key="frameInset" minX="16" minY="182" width="343" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="title" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C4F-GD-Q1R">
-                    <frame key="frameInset" minX="4.27%" minY="71" width="91.47%" height="30"/>
+                    <frame key="frameInset" minX="4.27%" minY="105" width="91.47%" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="25"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" text="New note" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AWp-MB-2t7">
+                    <frame key="frameInset" minX="4.27%" minY="228" width="91.47%" height="174"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <point key="canvasLocation" x="25.5" y="51.5"/>
