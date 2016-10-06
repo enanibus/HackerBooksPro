@@ -51,11 +51,11 @@ class NoteViewController: UIViewController {
     func syncModelWithView(){
         self.titleView?.text = _model.title
         self.noteTextView?.text = _model.text
-//        if (_model.photo?.image != nil){
-//            let w = self.imageView.bounds.width
-//            let imgResize = _model.photo?.image!.resizeWith(width: w)
-//            self.imageView.image = imgResize
-//        }
+        if (_model.photo?.image != nil){
+            let w = self.imageView?.bounds.width
+            let imgResize = _model.photo?.image!.resizeWith(width: w!)
+            self.imageView?.image = imgResize
+        }
         
     }
     
