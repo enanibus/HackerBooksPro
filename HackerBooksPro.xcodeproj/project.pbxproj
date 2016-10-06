@@ -16,6 +16,8 @@
 		0A08E12C1DA5AC1000FAB993 /* NotesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A08E12B1DA5AC1000FAB993 /* NotesCollectionViewController.swift */; };
 		0A08E12F1DA5B10A00FAB993 /* NoteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A08E12D1DA5B10A00FAB993 /* NoteCollectionViewCell.swift */; };
 		0A08E1301DA5B10A00FAB993 /* NoteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A08E12E1DA5B10A00FAB993 /* NoteCollectionViewCell.xib */; };
+		0A08E1331DA5BB7000FAB993 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A08E1311DA5BB7000FAB993 /* NoteViewController.swift */; };
+		0A08E1341DA5BB7000FAB993 /* NoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A08E1321DA5BB7000FAB993 /* NoteViewController.xib */; };
 		0A3173471D967506004E5D68 /* LibraryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3173461D967506004E5D68 /* LibraryTableViewController.swift */; };
 		0A31734A1D96CBD7004E5D68 /* Book+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3173481D96CBD7004E5D68 /* Book+CoreDataProperties.swift */; };
 		0A31734B1D96CBD7004E5D68 /* Author+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3173491D96CBD7004E5D68 /* Author+CoreDataProperties.swift */; };
@@ -86,6 +88,8 @@
 		0A08E12B1DA5AC1000FAB993 /* NotesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesCollectionViewController.swift; sourceTree = "<group>"; };
 		0A08E12D1DA5B10A00FAB993 /* NoteCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A08E12E1DA5B10A00FAB993 /* NoteCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoteCollectionViewCell.xib; sourceTree = "<group>"; };
+		0A08E1311DA5BB7000FAB993 /* NoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
+		0A08E1321DA5BB7000FAB993 /* NoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoteViewController.xib; sourceTree = "<group>"; };
 		0A3173461D967506004E5D68 /* LibraryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryTableViewController.swift; sourceTree = "<group>"; };
 		0A3173481D96CBD7004E5D68 /* Book+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Book+CoreDataProperties.swift"; path = "../Book+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0A3173491D96CBD7004E5D68 /* Author+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Author+CoreDataProperties.swift"; path = "../Author+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -291,6 +295,8 @@
 				0A08E11A1DA43F8D00FAB993 /* SimplePDFViewController.swift */,
 				0A08E11C1DA43F9B00FAB993 /* SimplePDFViewController.xib */,
 				0A08E12B1DA5AC1000FAB993 /* NotesCollectionViewController.swift */,
+				0A08E1311DA5BB7000FAB993 /* NoteViewController.swift */,
+				0A08E1321DA5BB7000FAB993 /* NoteViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -442,6 +448,7 @@
 				0A456ABF1D7F68AD00A09089 /* LaunchScreen.storyboard in Resources */,
 				0A5E0D471D9C65E10097F73F /* BookViewController.xib in Resources */,
 				0A4E88651D92F48900C59AD6 /* emptyPdf.pdf in Resources */,
+				0A08E1341DA5BB7000FAB993 /* NoteViewController.xib in Resources */,
 				0A4E88661D92F48900C59AD6 /* books_readable.json in Resources */,
 				0A456ABC1D7F68AD00A09089 /* Assets.xcassets in Resources */,
 				0A4E88641D92F48900C59AD6 /* emptyBookCover.png in Resources */,
@@ -489,6 +496,7 @@
 				0A08E11B1DA43F8D00FAB993 /* SimplePDFViewController.swift in Sources */,
 				0A3F419B1D8F33F200DB7713 /* BookTag+CoreDataClass.swift in Sources */,
 				0A3F41A31D8F33F200DB7713 /* Localization+CoreDataClass.swift in Sources */,
+				0A08E1331DA5BB7000FAB993 /* NoteViewController.swift in Sources */,
 				0A08E1171DA41CE500FAB993 /* AsyncImage.swift in Sources */,
 				0A4E88451D92E50900C59AD6 /* Cover+CoreDataProperties.swift in Sources */,
 				0A3F41A11D8F33F200DB7713 /* Tag+CoreDataClass.swift in Sources */,

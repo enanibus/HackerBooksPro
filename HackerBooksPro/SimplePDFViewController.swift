@@ -7,17 +7,56 @@
 //
 
 import UIKit
+import CoreData
 
 class SimplePDFViewController: UIViewController {
+    
     
     //MARK: Properties
     var model : Book
 
     @IBAction func viewNotes(_ sender: AnyObject) {
+        
+        let fr = NSFetchRequest<Annotation>(entityName: Annotation.entityName)
+        fr.fetchBatchSize = 50
+        fr.sortDescriptors = [NSSortDescriptor(key: "modificationDate",ascending: false)]
+        fr.predicate = NSPredicate(format: "book == %@", model)
+        
+        let fc = NSFetchedResultsController(fetchRequest: fr,
+                                            managedObjectContext: model.managedObjectContext!,
+                                            sectionNameKeyPath: nil, cacheName: nil)
+        
+        // Create Table viewController
+        /*
+         let nVC = NotesTableViewController(fetchedResultsController: fc as! NSFetchedResultsController<NSFetchRequestResult>, style: .plain)
+         
+         self.navigationController?.pushViewController(nVC, animated: true)
+         */
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 140, height: 150)
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 10
+        layout.sectionInset=UIEdgeInsets(top: 10,
+                                         left: 10,
+                                         bottom: 10,
+                                         right: 10)
+        
+        // Creamos el CollectionViewController
+        let cv = NotesCollectionViewController(fetchedResultsController: fc as! NSFetchedResultsController<NSFetchRequestResult>,
+                                               layout: layout)
+        
+        self.navigationController?.pushViewController(cv , animated: true)
     }
     
     @IBAction func addNote(_ sender: AnyObject) {
+        let note = Annotation(withBook: model, inContext: model.managedObjectContext!)
+        let noteVC = NoteViewController(model: note)
+        self.navigationController?.pushViewController(noteVC, animated: true)
     }
+    
+    @IBOutlet weak var Add: UIBarButtonItem!
     
     @IBOutlet weak var pdfViewer: UIWebView!
     

@@ -8,6 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SimplePDFViewController" customModule="HackerBooksPro" customModuleProvider="target">
             <connections>
+                <outlet property="Add" destination="QJG-8a-kJO" id="oES-2w-tT9"/>
                 <outlet property="pdfViewer" destination="FQM-nr-0ep" id="HB3-S5-nCq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

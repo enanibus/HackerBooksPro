@@ -13,7 +13,7 @@ class LibraryTableViewController: CoreDataTableViewController, UISearchControlle
     internal func libraryTableViewController(vc: LibraryTableViewController, didSelectBook book: Book) {
     }
     
-    let sameOne = CoreDataStack.defaultStack(modelName:  DATABASE)!
+    let sameOne = CoreDataStack.defaultStack(modelName: DATABASE)!
     let searchController = UISearchController(searchResultsController: nil)
     var delegate : LibraryTableViewControllerDelegate?
 }

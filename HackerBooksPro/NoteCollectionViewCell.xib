@@ -33,7 +33,11 @@
                 </subviews>
             </view>
             <size key="customSize" width="203" height="138"/>
-            <point key="canvasLocation" x="-11.5" y="-145"/>
+            <connections>
+                <outlet property="date" destination="cME-UK-0Z2" id="1Q0-uS-03g"/>
+                <outlet property="textView" destination="zyx-De-hWG" id="v7z-Uy-ItA"/>
+            </connections>
+            <point key="canvasLocation" x="-226" y="-136"/>
         </collectionViewCell>
     </objects>
 </document>

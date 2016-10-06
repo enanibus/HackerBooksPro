@@ -13,7 +13,7 @@ import UIKit
 public class Book: NSManagedObject {
     static let entityName = "Book"
     
-    let sameOne = CoreDataStack.defaultStack(modelName:  DATABASE)!
+    let sameOne = CoreDataStack.defaultStack(modelName: DATABASE)!
     
     //MARK: - Initializers
     
